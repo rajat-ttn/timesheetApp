@@ -65,6 +65,17 @@ module.exports.connections = {
   //   database: 'your_mongo_db_name_here' //optional
   // },
 
+
+  timesheetDB: {
+    adapter: 'sails-mongo',
+    host: 'localhost',
+    port: 27017,
+    database: 'timesheetApp',
+    wlNext: {
+      caseSensitive: true
+    }
+  },
+
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *
