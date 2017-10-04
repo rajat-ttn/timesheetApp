@@ -24,9 +24,11 @@ let AuthController = {
       passport.authenticate('google',
           function(err, user) {
               sails.log.error(user.token);
-              if(!user){
-                  return res.json({success: true, data: user})
-              }
+              return res.redirect('/auth/login?token=' + user.token)
+              /*if(!user){
+                  //return res.json({success: true, data: user})
+                  return res.view('login')
+              }*/
           })(req, res);
   }
 }

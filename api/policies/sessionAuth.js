@@ -8,10 +8,8 @@
  *
  */
 
-let GoogleAuth = require('google-auth-library')
-    , auth = new GoogleAuth
-    , client = new auth.OAuth2(sails.config.googleClientId, sails.config.googleAppSecret, sails.config.googleCallBackUrl)
-    ;
+let request = require('request');
+
 module.exports = function(req, res, next) {
 
   let authorizationHeader = req.headers['authorization']
@@ -25,18 +23,12 @@ module.exports = function(req, res, next) {
     }
   }
 
-  client.verifyIdToken(
-      token,
-      sails.config.googleClientId,
-      function(err, login) {
-        var payload = login.getPayload();
-        var userid = payload['sub'];
-        req.user = user;
-      });
-    
-  return res.json({err: null});
-
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  //return res.forbidden('You are not permitted to perform this action.');
+  request(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${ token }`, (err, response, body) => {
+      if(err){
+          return res.redirect('/auth/login');
+      } else {
+          req.user = body;
+          next();
+      }
+  })
 };
