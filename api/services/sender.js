@@ -116,10 +116,10 @@ const Promise = require('bluebird'),
     }
   };
 
-sendMessage.send({
-  entity: 'timesheetApp',
-  queue: 'sendMail',
-  msg: { ISIN: 'US0378331005' }
-});
+//sendMessage.send({
+//  entity: 'timesheetApp',
+//  queue: 'sendMail',
+//  msg: { ISIN: 'US0378331005' }
+//});
 
 module.exports = sendMessage;

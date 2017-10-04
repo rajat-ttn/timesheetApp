@@ -1,16 +1,17 @@
+"use strict";
 
 const passport = require('passport')
     , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
     ;
 
 let AuthController = {
-  
+
   login: (req, res) => {
     return res.view()
   }
-  
+
   , google: (req, res) => {
-        
+
       passport.use(new GoogleStrategy({
         clientID: sails.config.googleClientId
         , clientSecret: sails.config.googleAppSecret
