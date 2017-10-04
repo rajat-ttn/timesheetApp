@@ -34,14 +34,44 @@ function addSheet(auth) {
     resource: {
       properties:{
         title: "geekCombatTimeSheetAutoGenerateTest"
-      }
+      },
+      sheets: [
+        {
+          properties: {
+            title: "Rachit",
+            sheetId: 0
+          },
+          merges: [
+            {
+              startRowIndex: 0,
+              endRowIndex: 1,
+              startColumnIndex: 0,
+              endColumnIndex: 4,
+              sheetId: 0
+            }]
+        },
+        {
+          properties: {
+            title: "Rajat",
+            sheetId: 1
+          },
+          merges: [
+            {
+              startRowIndex: 0,
+              endRowIndex: 1,
+              startColumnIndex: 0,
+              endColumnIndex: 4,
+              sheetId: 1
+            }]
+        }
+      ]
     }
   }, (err, response) => {
     if (err) {
       console.log('The API returned an error: ' + err);
       return;
     } else {
-      console.log("Added");
+      console.log(response);
 }
 });
 }
