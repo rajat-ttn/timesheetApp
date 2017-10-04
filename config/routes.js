@@ -32,9 +32,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'get /login': 'AuthController.login'
-  , 'get /auth/google': 'AuthController.google'
-  , 'get /auth/google/callback': 'AuthController.googleCallback'
+    'GET /login': 'AuthController.login'
+  , 'GET /auth/google': 'AuthController.google'
+  , 'GET /auth/google/callback': 'AuthController.googleCallback'
+
+  , 'POST /spreadsheet/createForAll':'SpreadSheetController.createSpreadSheetsForAll'
 
   /***************************************************************************
   *                                                                          *
