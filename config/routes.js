@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  'get /login': 'AuthController.login'
+  , 'get /auth/google': 'AuthController.google'
+  , 'get /auth/google/callback': 'AuthController.googleCallback'
 
   /***************************************************************************
   *                                                                          *

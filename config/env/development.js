@@ -21,4 +21,8 @@ module.exports = {
   //   connection: 'someMongodbServer'
   // }
 
+  googleClientId: '975789717172-1rr1cemacehedgm44kmq7ci9a4lvm974.apps.googleusercontent.com'
+  , googleAppSecret: 'lnZ2u-uMpY-C_qZzDAookQFN'
+  , googleCallBackUrl: 'http://localhost:1337/auth/google/callback'
+
 };
