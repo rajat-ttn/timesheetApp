@@ -33,7 +33,7 @@ function addSheet(auth) {
     auth: auth,
     resource: {
       properties:{
-        title: "Anything-you-name"
+        title: "geekCombatTimeSheetAutoGenerateTest"
       }
     }
   }, (err, response) => {
@@ -68,6 +68,6 @@ function appendData(auth) {
 }
 
 authentication.authenticate().then((auth)=>{
-  getData(auth);
+  //getData(auth);
   addSheet(auth);
 });
