@@ -32,14 +32,37 @@ function addSheet(options) {
   var sheets = google.sheets('v4');
   const auth = this.auth;
   return new Promise(function(resolve, reject){
-    sheets.spreadsheets.create({
+
+    var payload = {
       auth: auth,
       resource: {
         properties:{
           title: options.spreadSheetTitle
         }
       }
-    }, function (err, response){
+    }
+
+    if(options.sheets && options.sheets.length){
+      payload.resource.sheets = [];
+      options.sheets.forEach(function (sheetObj, index) {
+        payload.resource.sheets.push({
+          properties: {
+            title: sheetObj.sheetTitle,
+            sheetId: index
+          },
+          merges: [
+            {
+              startRowIndex: 0,
+              endRowIndex: 1,
+              startColumnIndex: 0,
+              endColumnIndex: 4,
+              sheetId: index
+            }]
+        });
+      })
+    }
+
+    sheets.spreadsheets.create(payload, function (err, response){
       if(err){
         return reject(err)
       }
@@ -70,6 +93,49 @@ function appendData() {
   });
 }
 
+function bulkUpdateSheet(options) {
+  let sheets = google.sheets('v4')
+      , auth = this.auth
+      ;
+
+  let payload = {
+    auth: auth,
+    spreadsheetId: options.spreadSheetTitle,
+    resource: {
+      requests: []
+    }
+  }
+
+  if(options.sheets && options.sheets.length){
+    options.sheets.forEach(function (sheetObj, index) {
+      payload.resource.requests.push({
+        repeatCell: {
+          range: {
+            startRowIndex: sheetObj.startRowIndex,
+            endRowIndex: sheetObj.endRowIndex,
+            startColumnIndex: sheetObj.startColumnIndex,
+            endColumnIndex: sheetObj.endColumnIndex,
+            sheetId: index
+          },
+          cell: {
+            userEnteredValue: {
+              formulaValue: `=SUM(B${ sheetObj.startColumnIndex }:B${ sheetObj.endColumnIndex })`
+            }
+          },
+          fields: "userEnteredValue"
+        }
+      });
+    })
+  }
+
+  sheets.spreadsheets.batchUpdate(payload, (err, response) => {
+    if(err){
+      return reject(err)
+    }
+    resolve(response);
+  });
+}
+
 
 function GoogleSpreadSheetClient(){
 }
@@ -88,6 +154,7 @@ GoogleSpreadSheetClient.prototype.init = init;
 GoogleSpreadSheetClient.prototype.getData = getData;
 GoogleSpreadSheetClient.prototype.addSheet = addSheet;
 GoogleSpreadSheetClient.prototype.appendData = appendData;
+GoogleSpreadSheetClient.prototype.bulkUpdateSheet = bulkUpdateSheet;
 
 module.exports = GoogleSpreadSheetClient;
 

@@ -97,7 +97,64 @@ function appendData(auth) {
 });
 }
 
+function bulkUpdateSheet(auth) {
+  let sheets = google.sheets('v4');
+
+  let payload = {
+    auth: auth,
+    spreadsheetId: '10Xi2m0OfKnUo5AaS4vELQ77pFbDxaTOQX_xL9wOSucc',
+    resource: {
+      requests: [
+        {
+          repeatCell: {
+            range: {
+              startRowIndex: 2,
+              endRowIndex: 3,
+              startColumnIndex: 10,
+              endColumnIndex: 11,
+              sheetId: 0
+            },
+            cell: {
+              userEnteredValue: {
+                formulaValue: "=SUM(C4:C9)"
+              }
+            },
+            fields: "userEnteredValue"
+          }
+        },
+        {
+          repeatCell: {
+            range: {
+              startRowIndex: 2,
+              endRowIndex: 3,
+              startColumnIndex: 10,
+              endColumnIndex: 11,
+              sheetId: 1
+            },
+            cell: {
+              userEnteredValue: {
+                formulaValue: "=SUM(C3:C9)"
+              }
+            },
+            fields: "userEnteredValue"
+          }
+        }
+      ]
+    }
+  }
+
+  sheets.spreadsheets.batchUpdate(payload, (err, response) => {
+    if (err) {
+      console.log('The API returned an error: ' + err);
+      return;
+    } else {
+      console.log("Bulk modified");
+    }
+  });
+}
+
 authentication.authenticate().then((auth)=>{
   //getData(auth);
-  addSheet(auth);
+  //addSheet(auth);
+  bulkUpdateSheet(auth);
 });
