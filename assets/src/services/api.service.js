@@ -7,20 +7,6 @@
                 params: {
                     search:'@search'
                 }
-            },
-            getAllPlanets: {
-                url: APP_CONST.url + 'planets/?page=:page',
-                method: 'GET',
-                params: {
-                    page : '@page'
-                }
-            },
-            getPlanet: {
-                url: APP_CONST.url + 'planets/?search=:search',
-                method: 'GET',
-                params: {
-                    search : '@search'
-                }
             }
         });
     }]);
