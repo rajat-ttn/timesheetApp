@@ -1,27 +1,27 @@
 <!--  Header Block -->
-
-<div class="main_wrapper">
-    <div>
-        <a role="button" ng-click="dbd.openAdmin()">Admin section</a>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="dbd.user"><i class="fa fa-calendar" aria-hidden="true"></i> Newers TimeSheet</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="dbd.admin">Admin</a></li>
+                <li><a ui-sref="dbd.user">User</a></li>
+                <li><a ui-sref="dbd.user"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                <!--<li><a href="../navbar-static-top/">Static top</a></li>-->
+                <!--<li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-    <!-- // Hader Block -->
-
-    <!-- SideBar Block -->
-    <div class="dashboard-container">
-        <!--<side-bar></side-bar>-->
-        <!-- <div ui-view="sidebar" class="sidebar_bot"></div> -->
-        <!-- // SideBar Block -->
-
-        <!-- Content Block -->
-
-        <ui-view>
-
-        </ui-view>
-    </div>
-    <!-- Content Block -->
-
-
-    <!-- Footer Block -->
-    <!--     <div ui-view="footer" class="footer_bot"></div> -->
-    <!-- // Footer Block -->
+</nav>
+<div class="container">
+    <ui-view></ui-view>
 </div>
+

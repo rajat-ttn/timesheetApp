@@ -9,11 +9,5 @@
 
             $state.go('dbd.user');
 
-            this.openAdmin = () => {
-                if (true) {
-                    $state.go('dbd.admin');
-                }
-            }
-
         };
 })();
