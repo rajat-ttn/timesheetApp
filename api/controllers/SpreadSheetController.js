@@ -39,9 +39,48 @@ module.exports = {
           });
         })
         .catch(function(err){
-          console.log(err);
+          sails.log.error(err);
           return res.serverError('Error occurred while creating spreadSheets');
         })
       });
-  }
+  },
+    
+    createSheet: (req, res) => {
+        let userId = req.body.userId
+            , startDate = req.body.startDate
+            , endDate = req.body.endDate
+            ;
+        
+        DayEntry.native(function(err, collection) {
+            if (err) return res.serverError();
+            
+            collection
+                .find({userId: userId, entryDay: { $gte: new Date(startDate), $lte: new Date(endDate) }})
+                .sort({entryDay: 1})
+                .toArray(function (err, results) {
+                    if (err) return res.serverError();
+                    return res.json({results});
+                });
+        });
+    },
+
+    downloadSheet: function (req, res) {
+        let fileName = req.params['fileName']
+            , filePath = sails.config.sheetsPath + fileName;
+        ;
+
+        try{
+            // ToDo add logic to generate excel path at the specified path
+            if(fileName && fs.existsSync(filePath)){
+                res.download(filePath);
+            } else {
+                return res.serverError('Error occurred while downloading spreadSheets');
+            }
+        }
+        catch(err){
+            sails.log.error(`Error while trying to ${action} document whose
+             fileName is ${fileName} and giving error: ${err}`);
+            res.serverError('Error occurred while downloading spreadSheets');
+        }
+    }
 };
