@@ -46,7 +46,7 @@
                 });
 
 
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/login');
 
             function isUser(UserService, $state) {
 

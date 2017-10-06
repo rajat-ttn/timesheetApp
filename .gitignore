@@ -49,3 +49,4 @@ assets_old
 
 assets/bower_components
 tokens
+.tmp/
