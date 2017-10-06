@@ -39,10 +39,11 @@ module.exports.routes = {
   , 'POST /spreadsheet/createForAll': 'SpreadSheetController.createSpreadSheetsForAll'
   , 'POST /spreadsheet/create': 'SpreadSheetController.createSheet'
   , 'POST /spreadsheet/download': 'SpreadSheetController.downloadSheet'
-  
+
   , 'GET /user/getFilteredUsers': 'UserController.getFilteredUsers'
-  
+
   , 'GET /project/getAll': 'ProjectController.getAllProjects'
+  , 'GET /project/getRegionMap': 'ProjectController.getRegionMap'
 
   /***************************************************************************
   *                                                                          *
