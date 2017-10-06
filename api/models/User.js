@@ -1,11 +1,9 @@
 var User = {
-  schema: true,
-
+  autoPK: true,
+  tableName: 'users',
+  autoCreatedAt: true,
+  autoUpdatedAt: true,
   attributes: {
-    uid : { type: 'string', unique: true }
-    , name : { type: 'string' }
-    , email : { type: 'email',  unique: true }
-    , image : { type: 'string' }
   }
 };
 
