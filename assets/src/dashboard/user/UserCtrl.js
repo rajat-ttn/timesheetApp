@@ -4,14 +4,10 @@ class UserCtrl {
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$state = $state;
-        this.x = 'aaaaaaaaaaaa';
         this.admin();
     }
 
-
-
     admin() {
-        console.log(this.x);
     }
 }
 
