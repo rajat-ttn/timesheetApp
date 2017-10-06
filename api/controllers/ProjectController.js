@@ -50,14 +50,17 @@ module.exports = {
 
     createUpdateProject: (req, res) => {
         /*let inputData = req.params.all()
-            , data = req.body
             , payload = {
-                name: data['']
-                , client: { name: data[''] }
+                name: inputData['']
+                , client: { name: inputData[''] }
                 , emailConfig: {
-                    subject: data['subject']
+                    subject: inputData['subject']
                     , to: []
                 }
-            }*/
+            }
+        
+        if(inputData.action === 'create'){
+            
+        }*/
     }
 }

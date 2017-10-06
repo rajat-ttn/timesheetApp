@@ -41,10 +41,12 @@ module.exports.routes = {
   , 'POST /spreadsheet/download': 'SpreadSheetController.downloadSheet'
 
   , 'GET /user/getFilteredUsers': 'UserController.getFilteredUsers'
+  , 'GET /user/get': 'UserController.getData'
 
   , 'GET /project/getAll': 'ProjectController.getAllProjects'
   , 'GET /project/getRegionMap': 'ProjectController.getRegionMap'
   , 'DELETE /project/delete/:projectId': 'ProjectController.deleteProject'
+  , 'POST /project/:action(create|update)': 'ProjectController.createUpdateProject'
 
   /***************************************************************************
   *                                                                          *
