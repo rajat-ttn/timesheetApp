@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="timeSheet" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="timeSheet" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="timeSheet" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="timeSheet" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="timeSheet" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,11 +31,13 @@
   <!-- inject:js -->
   <script src="src/app.js"></script>
   <script src="src/const/config.js"></script>
+  <script src="src/dashboard/DashboardCtrl.js"></script>
+  <script src="src/login/LoginCtrl.js"></script>
   <script src="src/services/api.service.js"></script>
   <script src="src/services/user.service.js"></script>
-  <script src="src/states/login/login.controller.js"></script>
-  <script src="src/states/main/main.controller.js"></script>
   <script src="src/components/calendar/calendar.js"></script>
+  <script src="src/dashboard/admin/AdminCtrl.js"></script>
+  <script src="src/dashboard/user/UserCtrl.js"></script>
   <!-- endinject -->
   <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
   <script>
