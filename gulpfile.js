@@ -6,17 +6,13 @@ let gulp        = require('gulp'),
     stylus = require('gulp-stylus'),
     es = require('event-stream'),
     clean = require('gulp-clean'),
-    appPath = './assets/';
+    appPath = './assets/',
+    gulpCopy = require('gulp-copy');
 
 gulp.task('serve', ['sass'], function() {
-
-    browserSync.init({
-        server: "./assets/"
-    });
-
-    gulp.watch("./assets/src/**/*.scss", ['clean','sass']).on('change', browserSync.reload);
-    gulp.watch("./assets/src/**/*.js", ['index']).on('change', browserSync.reload);
-    gulp.watch("./assets/src/**/*.html").on('change', browserSync.reload);
+    gulp.watch("./assets/src/**/*.scss", ['clean','sass','cleanTmp','copy']);
+    gulp.watch("./assets/src/**/*.js", ['index','cleanTmp','copy']);
+    gulp.watch("./assets/**/*.html", ['cleanTmp','copy']);
 });
 
 gulp.task('sass', function() {
@@ -27,7 +23,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('clean', function () {
-    return gulp.src('./assets/src/css', {read: false})
+    return gulp.src(['./assets/src/css'], {read: false})
         .pipe(clean());
 });
 
@@ -47,4 +43,15 @@ gulp.task('index', function () {
         .pipe(gulp.dest('./assets'));
 });
 
-gulp.task('default', ['index','serve']);
+gulp.task('cleanTmp', function(){
+    return gulp.src(['./.tmp/**/*.*'], {read: false})
+        .pipe(clean());
+});
+
+gulp.task('copy', function(){
+    return gulp
+        .src('./assets/**')
+        .pipe(gulp.dest('./.tmp/public'));
+});
+
+gulp.task('default', ['index','cleanTmp','copy','serve']);
