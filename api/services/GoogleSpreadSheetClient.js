@@ -96,6 +96,8 @@ function appendData() {
 function bulkUpdateSheet(options) {
   let sheets = google.sheets('v4')
       , auth = this.auth
+      , sheetRequestObj = {}
+      , rowObj = {}
       ;
 
   let payload = {
@@ -108,13 +110,13 @@ function bulkUpdateSheet(options) {
 
   if(options.sheets && options.sheets.length){
     options.sheets.forEach(function (sheetObj, index) {
-      payload.resource.requests.push({
+      sheetRequestObj = {
         repeatCell: {
           range: {
-            startRowIndex: sheetObj.startRowIndex,
-            endRowIndex: sheetObj.endRowIndex,
-            startColumnIndex: sheetObj.startColumnIndex,
-            endColumnIndex: sheetObj.endColumnIndex,
+            startRowIndex: 0,
+            endRowIndex: 1,
+            startColumnIndex: 0,
+            endColumnIndex: 4,
             sheetId: index
           },
           cell: {
@@ -123,9 +125,44 @@ function bulkUpdateSheet(options) {
             }
           },
           fields: "userEnteredValue"
+        },
+        updateCells: {
+          range: {
+            startRowIndex: 2,
+            endRowIndex: sheetObj.length + 2,
+            startColumnIndex: 0,
+            endColumnIndex: 4,
+            sheetId: index
+          },
+          fields: "*",
+          rows: [
+            {
+              values: {
+                userEnteredValue: {
+                  stringValue: "To The New"
+                }
+              }
+            }
+          ]
         }
+      }
+
+      sheetObj.forEach(function (rowData) {
+
+          rowObj = {};
+          rowData.forEach(function (colData) {
+            rowObj.push({
+              userEnteredValue: {
+                stringValue: colData
+              }
+            })
+          })
+        sheetRequestObj.updateCells.rows.push({values: rowObj})
       });
-    })
+
+      payload.resource.requests.push(sheetRequestObj);
+
+    });
   }
 
   sheets.spreadsheets.batchUpdate(payload, (err, response) => {
