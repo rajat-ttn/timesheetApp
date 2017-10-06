@@ -36,7 +36,9 @@ module.exports.routes = {
   , 'GET /auth/google': 'AuthController.google'
   , 'GET /auth/google/callback': 'AuthController.googleCallback'
 
-  , 'POST /spreadsheet/createForAll':'SpreadSheetController.createSpreadSheetsForAll'
+  , 'POST /spreadsheet/createForAll': 'SpreadSheetController.createSpreadSheetsForAll'
+  , 'POST /spreadsheet/create': 'SpreadSheetController.createSheet'
+  , 'POST /spreadsheet/download': 'SpreadSheetController.downloadSheet'
 
   /***************************************************************************
   *                                                                          *

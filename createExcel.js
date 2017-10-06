@@ -14,7 +14,9 @@ const projectInfo = {
         day: 'Monday',
         date: '10/2/2017',
         hours: 8,
-        comments: 'raised PR for TAWA-4695'
+        comments: 'raised PR for TAWA-4695',
+        isHoliday: true,
+        isOnLeave: true
       },
       {
         day: 'Tuesday',
