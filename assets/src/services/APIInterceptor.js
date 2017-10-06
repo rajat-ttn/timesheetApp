@@ -1,7 +1,6 @@
 class APIInterceptor {
-    'ngIngect';
-
     constructor($rootScope, UserService, $state) {
+        'ngInject';
         this.$rootScope = $rootScope;
         this.UserService = UserService;
         this.$state = $state;

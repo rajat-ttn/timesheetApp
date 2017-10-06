@@ -1,25 +1,22 @@
 class UserService {
-    constructor($http, $q, $localStorage) {
+    constructor() {
         'ngInject';
-        this.$http = $http;
-        this.$q = $q;
+        this.currentUser = null;
     }
 
-    currentUser = null;
-
     setUser(data) {
-        currentUser = data;
-        localStorage.setItem('user', JSON.stringify(currentUser));
+        this.currentUser = data;
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
     }
 
     getUser() {
-        return currentUser || JSON.parse(localStorage.getItem('user'));
+        return this.currentUser || JSON.parse(localStorage.getItem('user'));
     }
 
     logout() {
         localStorage.setItem('user', JSON.stringify(null));
-        currentUser = null;
+        this.currentUser = null;
     }
 }
 
-angular.module("timeSheet").factory("UserService", UserService);
+angular.module("timeSheet").factory('UserService', UserService);
