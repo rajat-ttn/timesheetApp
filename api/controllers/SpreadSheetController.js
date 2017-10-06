@@ -39,7 +39,7 @@ module.exports = {
           });
         })
         .catch(function(err){
-          console.log(err);
+          sails.log.error(err);
           return res.serverError('Error occurred while creating spreadSheets');
         })
       });
@@ -52,14 +52,14 @@ module.exports = {
             ;
         
         DayEntry.native(function(err, collection) {
-            if (err) return res.json({success: false});
+            if (err) return res.serverError();
             
             collection
                 .find({userId: userId, entryDay: { $gte: new Date(startDate), $lte: new Date(endDate) }})
                 .sort({entryDay: 1})
                 .toArray(function (err, results) {
-                    if (err) return res.json({success:false, error: err});
-                    return res.json({success:true, results});
+                    if (err) return res.serverError();
+                    return res.json({results});
                 });
         });
     },
@@ -74,13 +74,13 @@ module.exports = {
             if(fileName && fs.existsSync(filePath)){
                 res.download(filePath);
             } else {
-                res.json({success: false, error: 'Requested file does not exist'});
+                return res.serverError('Error occurred while downloading spreadSheets');
             }
         }
         catch(err){
             sails.log.error(`Error while trying to ${action} document whose
              fileName is ${fileName} and giving error: ${err}`);
-            res.json({success: false});
+            res.serverError('Error occurred while downloading spreadSheets');
         }
     }
 };

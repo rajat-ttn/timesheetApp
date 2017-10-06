@@ -44,6 +44,7 @@ module.exports.routes = {
 
   , 'GET /project/getAll': 'ProjectController.getAllProjects'
   , 'GET /project/getRegionMap': 'ProjectController.getRegionMap'
+  , 'DELETE /project/delete/:projectId': 'ProjectController.deleteProject'
 
   /***************************************************************************
   *                                                                          *

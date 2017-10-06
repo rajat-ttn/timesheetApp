@@ -2,24 +2,17 @@
 
  module.exports = {
      getFilteredUsers: (req, res) => {
-         let regexText = req.query['searchText'] || ''
+         let searchText = req.query['searchText'] || ''
              ;
 
          User
-             .native(function(err, collection) {
-                 if (err) return res.json({success: false});
-
-                 collection.find({
-                     name: {$regex: new RegExp(regexText, 'i')}}
-                     , {_id: 0, name: 1, email: 1, uid: 1}
-                 )
-                     .toArray((err, users) => {
-                         if(err){
-                             return res.json({success: false});
-                         } else {
-                             return res.json({success: true, users });
-                         }
-                     });
+             .find({name: { 'startsWith': searchText }})
+             .then(users => {
+                 return res.json({users})
+             })
+             .catch(err => {
+                 sails.log.error(`error ${err} occured while fetching all projects`);
+                 return res.serverError('Error occurred while fetching user list for autosuggest');
              });
      }
  }
