@@ -21,6 +21,12 @@ const projects = [
           "name" : "Rachit Jain",
           "email" : "rachit.jain@tothenew.com"
         }
+      ],
+      "bcc" : [
+        {
+          "name" : "ABC",
+          "email" : "abc@tothenew.com"
+        }
       ]
     },
     "teamMembers" : [
@@ -35,7 +41,7 @@ const projects = [
       {
         "name" : "Abhishek Tejpaul",
         "email" : "abhishek.tejpaul@tothenew.com",
-        "role" : "PROJECT_MANAGER"
+        "role" : "PROJECT_OWNER"
       }
     ]
   },
@@ -78,48 +84,48 @@ const projects = [
 
 const dayEntries = [
   {
-    "userId" : 1.0,
-    "projectId" : 1.0,
+    "userId" : "1.0",
+    "projectId" : "1.0",
     "entryDay" : "Thu Oct 05 2017 00:00:00 GMT+0000",
     "createdAt" : "Thu Oct 05 2017 00:00:00 GMT+0000",
     "updatedAt" : "Thu Oct 05 2017 00:00:00 GMT+0000",
-    "workHours" : 8.0,
+    "workHours" : 8,
     "tasks" : [
       "Raised PR for TAWA-4695",
       "Working on TAWA-3543"
     ]
   }
 ,  {
-    "userId" : 1.0,
-    "projectId" : 1.0,
+    "userId" : "1.0",
+    "projectId" : "1.0",
     "entryDay" : "Thu Oct 06 2017 00:00:00 GMT+0000",
     "createdAt" : "Thu Oct 06 2017 00:00:00 GMT+0000",
     "updatedAt" : "Thu Oct 06 2017 00:00:00 GMT+0000",
-    "workHours" : 8.0,
+    "workHours" : 8,
     "tasks" : [
       "Raised PR for TAWA-4690",
       "Working on TAWA-3542"
     ]
   }
 ,  {
-    "userId" : 2.0,
-    "projectId" : 1.0,
+    "userId" : "2.0",
+    "projectId" : "1.0",
     "entryDay" : "Thu Oct 05 2017 00:00:00 GMT+0000",
     "createdAt" : "Thu Oct 05 2017 00:00:00 GMT+0000",
     "updatedAt" : "Thu Oct 05 2017 00:00:00 GMT+0000",
-    "workHours" : 8.0,
+    "workHours" : 8,
     "tasks" : [
       "Raised PR for TAWA-4695",
       "Working on TAWA-3543"
     ]
   }
 ,  {
-    "userId" : 2.0,
-    "projectId" : 1.0,
+    "userId" : "2.0",
+    "projectId" : "1.0",
     "entryDay" : "Thu Oct 06 2017 00:00:00 GMT+0000",
     "createdAt" : "Thu Oct 06 2017 00:00:00 GMT+0000",
     "updatedAt" : "Thu Oct 06 2017 00:00:00 GMT+0000",
-    "workHours" : 8.0,
+    "workHours" : 8,
     "tasks" : [
       "Raised PR for TAWA-4690",
       "Working on TAWA-3542"

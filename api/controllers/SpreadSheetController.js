@@ -51,7 +51,7 @@ module.exports = {
             , endDate = req.body.endDate
             ;
         
-        DayEntries.native(function(err, collection) {
+        DayEntry.native(function(err, collection) {
             if (err) return res.json({success: false});
             
             collection

@@ -19,11 +19,15 @@
 
 module.exports.policies = {
 
-  '*': 'sessionAuth',
+  '*': 'isLoggedIn',
 
   AuthController: {
     login: true
     , google: true
     , googleCallback: true
+  },
+  
+  ProjectController: {
+    getAllProjects: ['isLoggedIn'] // , 'isAdmin'
   }
 };
