@@ -4,11 +4,12 @@
 
         vm.login = function(){
             console.log(vm.username,vm.password);
-            ApiService.login({},function(r){
+            window.location.href = 'http://localhost:1337/auth/google'
+            /*ApiService.login({},function(r){
                console.log(r);
             }, function(err){
                 console.log(err);
-            });
+            });*/
         }
 
     }]);
