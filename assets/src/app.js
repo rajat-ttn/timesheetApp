@@ -1,8 +1,10 @@
 (function () {
     angular.module("timeSheet", ['ui.router', 'ngResource'])
-        .config(function ($stateProvider, $urlRouterProvider) {
-            $stateProvider
 
+        .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+            $httpProvider.interceptors.push('APIInterceptor');
+
+            $stateProvider
 
                 .state('login', {
                     url: '/login',
@@ -56,6 +58,5 @@
                 return UserService.getUser();
             }
 
-        })
-
+        });
 })();

@@ -10,7 +10,7 @@ class LoginCtrl {
         window.location.href = 'http://localhost:1337/auth/google';
         /*this.ApiService.login()
             .then(resp => {
-                console.log(resp);
+                console.log(resp.data);
             });*/
     }
 

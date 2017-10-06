@@ -1,8 +1,3 @@
-(function () {
-
-})();
-
-
 class ApiService {
     constructor($http, $resource, APP_CONST) {
         'ngInject';
@@ -13,10 +8,8 @@ class ApiService {
 
 
     login() {
-        console.log('ssssssss');
         return this.$http.get(`${this.APP_CONST.url}/auth/google`)
             .then(resp => {
-                console.log(resp);
                 return resp;
             })
     }

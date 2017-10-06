@@ -24,8 +24,10 @@ let AuthController = {
   googleCallback: (req, res) => {
       passport.authenticate('google',
           function(err, user) {
+
+          console.log(user);
               sails.log.error(user.token);
-              return res.redirect('/#!/dbd/user?token=' + user.token);
+              return res.send({data: user})//('/#!/dbd/user', user);
               /*if(!user){
                   //return res.json({success: true, data: user})
                   return res.view('login')
