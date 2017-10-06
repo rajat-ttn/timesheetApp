@@ -28,6 +28,6 @@ module.exports.policies = {
   },
   
   ProjectController: {
-    getAllProjects: ['isLoggedIn'] // , 'isAdmin'
+    '*': ['isLoggedIn'] // , 'isAdmin'
   }
 };
