@@ -10,6 +10,7 @@ const projects = [
       "name" : "Autofi"
     },
     "emailConfig" : {
+      subject: 'Daily status mail',
       "to" : [
         {
           "name" : "Rajat Sharma",
@@ -32,18 +33,27 @@ const projects = [
     "teamMembers" : [
       {
         "name" : "Rajat Sharma",
-        "email" : "rajat.sharma@tothenew.com"
+        "email" : "rajat.sharma@tothenew.com",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       },
       {
         "name" : "Rachit Jain",
-        "email" : "rachit.jain@tothenew.com"
+        "email" : "rachit.jain@tothenew.com",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       },
       {
         "name" : "Abhishek Tejpaul",
         "email" : "abhishek.tejpaul@tothenew.com",
-        "role" : "PROJECT_OWNER"
+        "role" : "PROJECT_OWNER",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       }
-    ]
+    ],
+    startDate: new Date('2017-10-01'),
+    region: 'US_WEST',
+    logWorkCutOffTime: '75600000'
   },
   {
     "_id" : 2,
@@ -52,34 +62,49 @@ const projects = [
       "name" : "TVL"
     },
     "emailConfig" : {
+      subject: 'Daily status mail',
       "to" : [
         {
           "name" : "Rajat Sharma",
-          "email" : "rajat.sharma@tothenew.com"
+          "email" : "rajat.sharma@tothenew.com",
+          startDate: new Date('2017-10-01'),
+          endDate: new Date('2018-10-01'),
         }
       ],
       "cc" : [
         {
           "name" : "Rachit Jain",
-          "email" : "rachit.jain@tothenew.com"
+          "email" : "rachit.jain@tothenew.com",
+          startDate: new Date('2017-10-01'),
+          endDate: new Date('2018-10-01'),
         }
       ]
     },
     "teamMembers" : [
       {
         "name" : "Anand Shukla",
-        "email" : "anandnath.shukla@tothenew.com"
+        "email" : "anandnath.shukla@tothenew.com",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       },
       {
         "name" : "Anurag Malhotra",
-        "email" : "anurag.malhotra@tothenew.com"
+        "email" : "anurag.malhotra@tothenew.com",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       },
       {
         "name" : "Abhishek Tejpaul",
         "email" : "abhishek.tejpaul@tothenew.com",
-        "role" : "PROJECT_MANAGER"
+        "role" : "PROJECT_MANAGER",
+        startDate: new Date('2017-10-01'),
+        endDate: new Date('2018-10-01'),
       }
-    ]
+    ],
+    startDate: new Date('2017-10-01'),
+    endDate: new Date('2018-10-01'),
+    region: 'AUS',
+    logWorkCutOffTime: '75600000'
   }];
 
 const dayEntries = [
@@ -136,12 +161,14 @@ const users = [
   {
     "_id" : 1,
     "email" : "rajat.sharma@tothenew.com",
-    "name" : "Rajat Sharma"
+    "name" : "Rajat Sharma",
+    "role": 'admin'
   },
   {
     "_id" : 2,
     "email" : "rachit.jain@tothenew.com",
-    "name" : "Rachit Jain"
+    "name" : "Rachit Jain",
+    "role": 'admin'
   }];
 
 Promise.promisifyAll(sails);
