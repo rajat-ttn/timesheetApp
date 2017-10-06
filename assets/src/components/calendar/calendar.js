@@ -18,9 +18,15 @@
 
             function run(){
                 $($element).fullCalendar({
+                    dayClick: function(date, jsEvent, view) {
+                        eventas = {};
+                        eventas.title = "CLICKED!";
+                        eventas.start = date.format();
+                        $($element).fullCalendar('renderEvent', eventas);
+                    },
                     header: {
                         left: 'prev,next today',
-                        center: 'Newers Calndar',
+                        center: 'title',
                         right: 'month,basicWeek,basicDay'
                     },
                     defaultDate: '2017-09-12',
