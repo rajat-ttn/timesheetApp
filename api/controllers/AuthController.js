@@ -27,7 +27,7 @@ let AuthController = {
 
           console.log(user);
               sails.log.error(user.token);
-              return res.redirect('/#!/dbd/user?token=' + user.token);
+              return res.redirect('/#!/dbd?token=' + user.token);
               /*if(!user){
                   //return res.json({success: true, data: user})
                   return res.view('login')

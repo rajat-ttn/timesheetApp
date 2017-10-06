@@ -6,9 +6,16 @@ class ApiService {
         this.APP_CONST = APP_CONST;
     }
 
+    getUser() {
+        return this.$http.get('')
+            .then(resp => {
+                return resp;
+            })
+    }
+
 
     login() {
-        return this.$http.get(`${this.APP_CONST.url}/auth/google`)
+        return this.$http.get('/user/get')
             .then(resp => {
                 return resp;
             })

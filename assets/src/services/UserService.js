@@ -9,6 +9,10 @@ class UserService {
         localStorage.setItem('user', JSON.stringify(this.currentUser));
     }
 
+    setToken(data) {
+        localStorage.setItem('token', JSON.stringify(data));
+    }
+
     getUser() {
         return this.currentUser || JSON.parse(localStorage.getItem('user'));
     }
