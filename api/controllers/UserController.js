@@ -17,10 +17,8 @@
      },
      
      getData: (req, res) => {
-         let userId = req.query['userId'];
-         
-         User
-             .find({id: userId})
+          User
+             .find({email: req.user.email})
              .then(user => {
                  return res.json({user})
              })
