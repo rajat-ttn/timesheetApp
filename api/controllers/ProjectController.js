@@ -77,7 +77,7 @@ module.exports = {
                 })
         } else {
             Project
-                .updateOne({id: projectId}, payload)
+                .updateOne({id: inputData['projectId']}, payload)
                 .then(project => {
                     return res.json({data: project })
                 })
