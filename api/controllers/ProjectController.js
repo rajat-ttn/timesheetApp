@@ -7,7 +7,7 @@ module.exports = {
         Project
             .find({isDeleted: {$ne: true}})
             .then(projects => {
-                return res.json({projects})
+                return res.json({ data: { projects }})
             })
             .catch(err => {
                 sails.log.error(`error ${err} occured while fetching all projects`);
@@ -25,7 +25,7 @@ module.exports = {
               }
               regionProjectMap[project.region].push({projectId: project.id, projectName:project.name});
             })
-            return res.json({regionProjectMap})
+            return res.json({ data: { regionProjectMap }})
         })
         .catch(err => {
           sails.log.error(`error ${err} occured while fetching region map`);
@@ -38,9 +38,9 @@ module.exports = {
             ;
 
         Project
-            .update({id: projectId},{isDeleted: true})
+            .updateOne({id: projectId},{isDeleted: true})
             .then(projects => {
-                return res.json({projects})
+                return res.json({data: { projects }})
             })
             .catch(err => {
                 sails.log.error(`error ${err} occured while deleting project`);
@@ -49,18 +49,42 @@ module.exports = {
     },
 
     createUpdateProject: (req, res) => {
-        /*let inputData = req.params.all()
+        let inputData = req.params.all()
             , payload = {
-                name: inputData['']
-                , client: { name: inputData[''] }
+                name: inputData['projectName']
+                , client: { name: inputData['clientName'] }
+                , region: inputData['region']
                 , emailConfig: {
                     subject: inputData['subject']
-                    , to: []
+                    , to: inputData['to']
+                    , cc: inputData['cc']
+                    , bcc: inputData['bcc']
+                    , dailyStatusEnabled: inputData['dailyStatusEnabled']
                 }
+                , teamMembers: inputData['teamMembers']
+                , logWorkCutOffTime: inputData['cutOffTime']
             }
         
         if(inputData.action === 'create'){
-            
-        }*/
+            Project
+                .create({id: projectId},{isDeleted: true})
+                .then(project => {
+                    return res.json({ data: { project} })
+                })
+                .catch(err => {
+                    sails.log.error(`error ${err} occured while deleting project`);
+                    return res.serverError();
+                })
+        } else {
+            Project
+                .updateOne({id: projectId}, payload)
+                .then(projects => {
+                    return res.json({data: { project } })
+                })
+                .catch(err => {
+                    sails.log.error(`error ${err} occured while deleting project`);
+                    return res.serverError();
+                })
+        }
     }
 }
