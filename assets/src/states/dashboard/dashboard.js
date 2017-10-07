@@ -1,10 +1,11 @@
 class DashboardCtrl {
-    constructor($location, $state, UserService, ApiService) {
+    constructor($location, $state, UserService, ApiService, User) {
         'ngInject';
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$location = $location;
         this.$state = $state;
+        this.User = User.data.user;
         this.initialize();
     }
 

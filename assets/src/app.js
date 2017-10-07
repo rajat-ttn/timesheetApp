@@ -7,39 +7,35 @@
 
                 .state('login', {
                     url: '/login',
-                    templateUrl: './src/login/login.html',
+                    templateUrl: './src/states/login/login.html',
                     controller: 'LoginCtrl',
-                    controllerAs: 'login',
-                    resolve: {isUser: isUser}
+                    controllerAs: 'model',
+                    resolve: {User: isUser}
                 })
 
                 .state('dbd', {
                     url: '/dbd',
                     views: {
                         "": {
-                            templateUrl: './src/dashboard/dbd.html',
+                            templateUrl: './src/states/dashboard/dashboard.html',
                             controller: 'DashboardCtrl',
-                            controllerAs: 'dbd'
+                            controllerAs: 'model'
                         }
-                        /*"header@dbd": {
-                         templateUrl: './src/dashboard/header.html',
-                         controller:  'HeaderController',
-                         controllerAs: 'header'
-                         }*/
-                    }
+                    },
+                    resolve: {User: isUser}
                 })
                 .state('dbd.admin', {
                     url: '/admin',
                     controller: 'AdminCtrl',
-                    controllerAs: 'admin',
-                    templateUrl: './src/dashboard/admin/admin.html',
+                    controllerAs: 'model',
+                    templateUrl: './src/states/admin/admin.html',
                     resolve: {User: isUser}
                 })
                 .state('dbd.user', {
                     url: '/user',
                     controller: 'UserCtrl',
-                    controllerAs: 'user',
-                    templateUrl: './src/dashboard/user/user.html',
+                    controllerAs: 'model',
+                    templateUrl: './src/states/user/user.html',
                     resolve: {User: isUser}
                 });
 
