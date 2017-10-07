@@ -8,7 +8,7 @@
          User
              .find({name: { 'startsWith': searchText }})
              .then(users => {
-                 return res.json({users})
+                 return res.json({ data: { users }})
              })
              .catch(err => {
                  sails.log.error(`error ${err} occured while fetching user list for autosuggest`);
@@ -18,9 +18,9 @@
      
      getData: (req, res) => {
           User
-             .find({email: req.user.email})
+             .findOne({email: req.user.email})
              .then(user => {
-                 return res.json({user})
+                 return res.json({data: { user }})
              })
              .catch(err => {
                  sails.log.error(`error ${err} occured while fetching user detail`);
