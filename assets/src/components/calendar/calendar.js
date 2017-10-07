@@ -27,7 +27,8 @@
                             targetEvent: jsEvent,
                             clickOutsideToClose:true,
                             locals : {
-                                date : date
+                                date : date,
+                                elem : $element
                             }
                         });
                     },
@@ -40,7 +41,7 @@
                     navLinks: true, // can click day/week names to navigate views
                     editable: true,
                     eventLimit: true, // allow "more" link when too many events
-                    events: $scope.data,
+                    events: $scope.data
                 });
             }
 
