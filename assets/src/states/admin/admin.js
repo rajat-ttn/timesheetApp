@@ -1,3 +1,20 @@
+const Project = {
+    projectName: '',
+    clientName: '',
+    region: '',
+    emailConfig: {
+        subject: '',
+        to: [],
+        cc: [],
+        bcc: [],
+        dailyStatusEnabled: false
+    },
+    teamMembers: [],
+    logWorkCutOffTime: '', //in ms
+    startDate: '',
+    endDate: ''
+};
+
 class AdminCtrl {
     constructor(ApiService, UserService, $state, ngDialog, $mdDialog) {
         'ngInject';
@@ -11,11 +28,6 @@ class AdminCtrl {
         this.getProjects();
     }
 
-    // getRegion() {
-    //     this.ApiService.getRegion()
-    //         .then(resp => this.region = resp.data);
-    // }
-
     getProjects() {
         this.saving = true;
         this.ApiService.getProjects()
@@ -25,68 +37,31 @@ class AdminCtrl {
             })
     }
 
-    // editProject(project) {
-    //     this.project = project;
-    // }
+     editProject(ev, project) {
+         this.project = project;
+         this.showAdvanced(ev, project);
+     }
 
-    // loadUsers($query) {
-    //     return this.ApiService.getUsers($query)
-    //         .then(resp => {
-    //             return resp;
-    //         });
-    // }
 
     logout() {
         this.UserService.logout();
     };
 
-    // getEmails(data) {
-    //     let emails = [];
-    //     if(data.length) {
-    //         data.forEach(item =>  emails.push(item.email));
-    //     }
-    //     return emails;
-    // }
 
-    // save(project) {
-    //     this.project.emailConfig.to  = this.getEmails(this.tagsTo);
-    //     this.project.emailConfig.cc  = this.getEmails(this.tagsCc);
-    //     this.project.emailConfig.bcc  = this.getEmails(this.tagsBcc);
-    //     this.saving = true;
-    //     if (project.projectId) {
-    //        return this.ApiService.updateProject(project)
-    //             .then(resp => {
-    //                 this.saving = false;
-    //             });
-    //     }
-    //     this.ApiService.createProject(project)
-    //         .then(resp => {
-    //             this.saving = false;
-    //         });
-    // }
-
-    showAdvanced(ev) {
+    showAdvanced(ev, project) {
     this.$mdDialog.show({
         controller: 'addProject',
         controllerAs: 'model',
         templateUrl: 'src/modal/addProject/addProject.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true
+        clickOutsideToClose:true,
+        locals: {
+            project: project || angular.copy(Project)
+        },
         // fullscreen: customFullscreen // Only for -xs, -sm breakpoints.
         });
     }
-
-    // addProject(){
-    //     this.ngDialog.open({
-    //         templateUrl: 'src/modal/addProject/addProject.html',
-    //         controller: 'addProject',
-    //         controllerAs: 'model',
-    //         width: 600
-    //     });
-    // }
-
-    /**/
 }
 
 
