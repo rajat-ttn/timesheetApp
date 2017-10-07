@@ -11,6 +11,20 @@ class ApiService {
             })
     }
 
+    getRegion() {
+        return this.$http.get('/project/getRegionMap')
+            .then(resp => {
+                return resp;
+            })
+    }
+
+    getProjects() {
+        return this.$http.get('/project/getAll')
+            .then(resp => {
+                return resp;
+            })
+    }
+
     getUsers(query) {
         let params;
         if(query) {

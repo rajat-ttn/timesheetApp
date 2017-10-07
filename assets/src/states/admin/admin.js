@@ -24,6 +24,25 @@ class AdminCtrl {
         this.UserService = UserService;
         this.$state = $state;
         this.project = Project;
+        this.getProjects();
+    }
+
+    getRegion() {
+        this.ApiService.getRegion()
+            .then(resp => this.region = resp.data);
+    }
+
+    getProjects() {
+        this.saving = true;
+        this.ApiService.getProjects()
+            .then(resp => {
+                this.projects = resp.data;
+                this.saving = false;
+            })
+    }
+
+    editProject(project) {
+        this.project = project;
     }
 
     loadUsers($query) {
