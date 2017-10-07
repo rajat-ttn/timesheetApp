@@ -69,7 +69,7 @@ module.exports = {
   },
 
   downloadSheet: function (req, res) {
-    let inputData = req.body
+    let inputData = req.params.all()
       , fileName = inputData['fileName']
       , filePath = './excelSheets' + '/' + fileName;
 
@@ -131,7 +131,7 @@ function getProjectInfoForMonth(project, startDate, endDate) {
                 day: moment(currentTeamMemberDayEntry.entryDay).format('dddd'),
                 date: moment(currentTeamMemberDayEntry.entryDay).format('L'),
                 hours: currentTeamMemberDayEntry.workHours,
-                comments: currentTeamMemberDayEntry.tasks.join('\n')
+                comments: currentTeamMemberDayEntry.tasks.join(' \r\n')
               };
             });
             teamMember.dataEntries = currentTeamMemberDayEntries;
