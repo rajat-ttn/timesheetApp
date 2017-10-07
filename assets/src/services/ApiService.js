@@ -10,6 +10,13 @@ class ApiService {
                 return resp;
             })
     }
+
+    getUsers(query) {
+        return this.$http.get('/user/getFilteredUsers', {searchText:'raj'})
+            .then(resp => {
+                return resp;
+            })
+    }
 }
 
 angular.module("timeSheet")

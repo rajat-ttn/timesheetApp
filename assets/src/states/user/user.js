@@ -4,11 +4,8 @@ class UserCtrl {
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$state = $state;
-        this.admin();
     }
 
-    admin() {
-    }
 }
 
 angular.module("timeSheet")

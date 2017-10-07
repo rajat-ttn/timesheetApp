@@ -5,6 +5,7 @@ function APIInterceptor($rootScope, UserService, $state) {
     //'ngInject';
     return {
         request,
+        response,
         responseError
     };
 
@@ -22,5 +23,9 @@ function APIInterceptor($rootScope, UserService, $state) {
             //$rootScope.$broadcast('unauthorized');
         }
         return response
+    }
+
+    function response(response) {
+        return response;
     }
 }

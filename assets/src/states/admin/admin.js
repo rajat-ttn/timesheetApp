@@ -1,11 +1,24 @@
-(function () {
-    angular.module("timeSheet").controller('AdminCtrl', ['$scope', 'User', 'ApiService', 'UserService', '$state', function ($scope, User, ApiService, UserService, $state) {
-        var vm = this;
-        vm.user = User;
+class AdminCtrl {
+    constructor(ApiService, UserService, $state) {
+        'ngInject';
 
-        vm.logout = function () {
-            UserService.logout();
-            $state.go('home.login')
-        };
-    }]);
-})();
+        //this.User = User;
+        this.ApiService = ApiService;
+        this.UserService = UserService;
+        this.$state = $state;
+    }
+
+    loadUsers(query) {
+        this.ApiService.getUsers(query)
+            .then(users => {
+                return users;
+            });
+    }
+
+    logout() {
+        this.UserService.logout();
+    };
+}
+
+
+angular.module("timeSheet").controller('AdminCtrl', AdminCtrl);
