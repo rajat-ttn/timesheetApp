@@ -16,7 +16,7 @@ class DashboardCtrl {
 
         this.ApiService.getUser()
             .then(resp => {
-                this.User = resp.data.data;
+                this.User = resp.data;
                 this.UserService.setUser(resp.data);
                 this.$state.go('dbd.user');
             })

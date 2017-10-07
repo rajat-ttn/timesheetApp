@@ -1,5 +1,5 @@
 (function () {
-    angular.module("timeSheet", ['ui.router', 'ngResource', 'ngTagsInput'])/*'ngTagsInput'*/
+    angular.module("timeSheet", ['ui.router', 'ngResource', 'ngTagsInput'])
 
         .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.interceptors.push('APIInterceptor');

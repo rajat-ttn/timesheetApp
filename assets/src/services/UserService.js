@@ -19,7 +19,7 @@ class UserService {
     }
 
     getToken() {
-        return this.currentUser || JSON.parse(localStorage.getItem('token'));
+        return JSON.parse(localStorage.getItem('token'));
     }
 
     logout() {

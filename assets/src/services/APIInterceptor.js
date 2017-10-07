@@ -26,6 +26,9 @@ function APIInterceptor($rootScope, UserService, $state) {
     }
 
     function response(response) {
+        if (!(/\.(htm?l|svg|css|js|png|map|jpe?g)$/i.test(response.config.url.toLowerCase())) && response.config.url != "http://api.kontex.com/login" && response.config.url != "http://api.kontex.com/profile") {
+            return response.data
+        }
         return response;
     }
 }
