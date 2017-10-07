@@ -48,6 +48,9 @@ module.exports.routes = {
   , 'DELETE /project/delete/:projectId': 'ProjectController.deleteProject'
   , 'POST /project/:action(create|update)': 'ProjectController.createUpdateProject'
 
+  , 'POST /entry/:action(create|update)': 'EntryController.createUpdateEntry'
+  , 'GET /entry/getList': 'EntryController.getEntries'
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
