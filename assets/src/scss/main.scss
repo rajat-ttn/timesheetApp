@@ -17,5 +17,5 @@ body{
   clear: both;
 }
 
-@import "../login/login";
-@import "../dashboard/admin/index";
+@import "../states/login/login";
+@import "../states/admin/admin";

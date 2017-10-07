@@ -6,12 +6,7 @@ class LoginCtrl {
     }
 
     login()  {
-        //console.log(vm.username,vm.password);
         window.location.href = 'http://localhost:1337/auth/google/';
-        /*this.ApiService.login()
-            .then(resp => {
-                console.log(resp.data);
-            });*/
     }
 
 }
