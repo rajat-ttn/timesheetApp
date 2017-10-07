@@ -1,164 +1,36 @@
-<div class="col-lg-1"></div>
-<div class="col-lg-8">
-    <form class="form-horizontal">
-        <div class="form-group" name="model.project_form">
-            <label class="col-sm-4 control-label">Project Name</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.projectName" class="form-control" placeholder="Project Name">
+    <div class="admin">
+        <div layout="row" layout-wrap>
+            <div flex="50" layout="row" layout-align="start center">
+                <h2>Projects</h2>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Client Name</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.clientName" class="form-control" placeholder="Client Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Region Name</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.region" class="form-control" placeholder="Region Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Client Config</label>
-            <div class="col-sm-6">
-                <div class="checkbox">
-                    <label>
-                        <input ng-model="model.project.emailConfig.dailyStatusEnabled" type="checkbox"> Daily Status Email
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label"></label>
-            <div class="col-sm-6">
-                <tags-input
-                        ng-model="model.tagsTo"
-                        display-property="email"
-                        placeholder="To"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
-                <!--<input type="text" ng-model="model.project.emailConfig.to" class="form-control" placeholder="Too">-->
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label"></label>
-            <div class="col-sm-6">
-                <tags-input
-                        ng-model="model.tagsCc"
-                        display-property="email"
-                        placeholder="Cc"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
-                <!--<input type="text" class="form-control" placeholder="Cc">-->
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label"></label>
-            <div class="col-sm-6">
-                <tags-input
-                        ng-model="model.tagsBcc"
-                        display-property="email"
-                        placeholder="Bcc"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
-                <!--<input type="text" class="form-control" placeholder="Bcc">-->
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label"></label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.emailConfig.subject" class="form-control" placeholder="Subject">
-            </div>
-
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Team</label>
-            <div class="col-sm-6">
-                <tags-input
-                    ng-model="model.project.teamMembers"
-                    display-property="name"
-                    placeholder="Add a user"
-                    add-from-autocomplete-only="true"
-                    replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                        source="model.loadUsers($query)"
-                        debounce-delay="50"
-                        min-length="0"
-                        load-on-focus="true"
-                        load-on-empty="true"
-                        max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Dev</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Cut Off</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.logWorkCutOffTime" class="form-control" placeholder="Cut Off">
+            <div flex="50" layout="row" layout-align="end center">
+                <md-button class="md-primary md-raised" ng-click="model.showAdvanced($event)">
+                    Add Project
+                </md-button>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Start Date</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.startDate" class="form-control" placeholder="Cut Off">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-4 control-label">End Date</label>
-            <div class="col-sm-8">
-                <input type="text" ng-model="model.project.endDate" class="form-control" placeholder="Cut Off">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-10">
-                <button type="submit" ng-click="model.save(model.project)" ng-disabled="model.project_form.$invalid || model.saving"  class="btn btn-default">Add Project</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="col-lg-2"></div>
-
+        <table  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <thead>
+            <tr>
+                <th>Project name</th>
+                <th>Client name</th>
+                <th>Region</th>
+                <th>Daily Email</th>
+                <th>Team</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr grid-item ng-repeat="project in model.projects">
+                <td>{{project.name}}</td>
+                <td>{{project.client.name}}</td>
+                <td>{{project.region}}</td>
+                <td><input type="checkbox" ng-model="project.emailConfig.dailyStatusEnabled"></td>
+                <td><span ng-repeat="team in project.teamMembers">{{team.email}}</span></td>
+                <td><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 

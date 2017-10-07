@@ -1,5 +1,5 @@
 (function () {
-    angular.module("timeSheet", ['ui.router', 'ngResource', 'ngTagsInput'])
+    angular.module("timeSheet", ['ngMaterial','ui.router', 'ngResource', 'ngTagsInput', 'ngDialog'])
 
         .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.interceptors.push('APIInterceptor');
@@ -46,6 +46,7 @@
 
                 if (UserService.getUser()) {
                     //$state.go('dbd');
+                    // this.$state.go('dbd.user');
                 }
                 else {
                     $state.go('login');
@@ -53,5 +54,8 @@
                 return UserService.getUser();
             }
 
-        });
+        }).config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .accentPalette('blue');
+    });
 })();

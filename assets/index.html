@@ -6,11 +6,12 @@
   <title>Timesheet Management</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="975789717172-1rr1cemacehedgm44kmq7ci9a4lvm974.apps.googleusercontent.com">
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
   <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
   <!-- endinject -->
   <!-- inject:css -->
   <link rel="stylesheet" href="src/css/main.css">
@@ -29,9 +30,13 @@
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
+  <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
   <script src="src/app.js"></script>
@@ -40,22 +45,11 @@
   <script src="src/services/ApiService.js"></script>
   <script src="src/services/UserService.js"></script>
   <script src="src/components/calendar/calendar.js"></script>
+  <script src="src/modal/addProject/addProject.js"></script>
   <script src="src/states/admin/admin.js"></script>
   <script src="src/states/dashboard/dashboard.js"></script>
   <script src="src/states/login/login.js"></script>
   <script src="src/states/user/user.js"></script>
   <!-- endinject -->
-  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-  <script>
-    function start() {
-      gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: '975789717172-1rr1cemacehedgm44kmq7ci9a4lvm974.apps.googleusercontent.com'
-          // Scopes to request in addition to 'profile' and 'email'
-          //scope: 'additional_scope'
-        });
-      });
-    }
-  </script>
 </body>
 </html>
