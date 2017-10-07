@@ -1,30 +1,26 @@
-class APIInterceptor {
-    constructor($rootScope, UserService, $state) {
-        'ngInject';
-        this.$rootScope = $rootScope;
-        this.UserService = UserService;
-        this.$state = $state;
-    }
+angular.module("timeSheet")
+    .factory('APIInterceptor', APIInterceptor);
 
+function APIInterceptor($rootScope, UserService, $state) {
+    //'ngInject';
+    return {
+        request,
+        responseError
+    };
 
-    request(config) {
-        let currentUser = this.UserService.getUser();
-        let access_token = currentUser ? currentUser.access_token : null;
+    function request(config) {
+        let access_token = UserService.getToken() || null;
         if (access_token) {
             config.headers.Authorization = `Bearer ${access_token}`;
         }
         return config;
-    };
+    }
 
-    responseError(response) {
+    function responseError(response) {
         if (response.status === 401) {
-            this.UserService.logout();
-            this.$state.go('login');
+            UserService.logout();
             //$rootScope.$broadcast('unauthorized');
         }
-        return response;
-    };
+        return response
+    }
 }
-
-angular.module("timeSheet")
-    .service('APIInterceptor', APIInterceptor);
