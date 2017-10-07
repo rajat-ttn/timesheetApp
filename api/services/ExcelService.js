@@ -129,7 +129,7 @@ function createWorkSheetHeaders(worksheet, options) {
 
 function addDataEntries(worksheet, dataEntries, dateRange) {
     //Add daily data entries
-    //dataEntries = fillDataEntryGaps(dataEntries, dateRange);
+    dataEntries = fillDataEntryGaps(dataEntries, dateRange);
     _.forEach(dataEntries, function (entry, index) {
         const row = worksheet.getRow(6 + index + 1);
         row.getCell(1).value = entry.day;

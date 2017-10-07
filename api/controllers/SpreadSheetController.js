@@ -7,7 +7,9 @@
  */
 
 const Promise = require('bluebird')
+    , ObjectID = require('mongodb').ObjectID
     , fs = require('fs')
+    , moment = require('moment')
     ;
 
 module.exports = {
@@ -69,7 +71,7 @@ module.exports = {
   downloadSheet: function (req, res) {
     let inputData = req.body
       , fileName = inputData['fileName']
-      , filePath = './excelSheets' + '/' + fileName;
+      , filePath = './excelSheets' + '/' + fileName + '.xlsx';
 
     try {
       if (fileName && fs.existsSync(filePath)) {
@@ -123,14 +125,14 @@ function getProjectInfoForMonth(project, startDate, endDate) {
         .toArray(function (err, dayEntries) {
           if (err) return reject(err);
           _.forEach(projectInfo.teamMembers, function(teamMember){
-            let currentTeamMemberDayEntries = _.find(dayEntries, {email:teamMember.email});
+            let currentTeamMemberDayEntries = _.filter(dayEntries, {userId: teamMember.id });
 
             currentTeamMemberDayEntries = _.map(currentTeamMemberDayEntries, function(currentTeamMemberDayEntry){
               return {
                 day: moment(currentTeamMemberDayEntry.entryDay).format('dddd'),
                 date: moment(currentTeamMemberDayEntry.entryDay).format('L'),
                 hours: currentTeamMemberDayEntry.workHours,
-                comments: currentTeamMemberDayEntry.join('\n')
+                comments: currentTeamMemberDayEntry.tasks.join('\n')
               };
             });
             teamMember.dataEntries = currentTeamMemberDayEntries;
