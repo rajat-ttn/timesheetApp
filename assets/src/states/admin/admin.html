@@ -28,7 +28,7 @@
                 <td>{{project.region}}</td>
                 <td><input type="checkbox" ng-model="project.emailConfig.dailyStatusEnabled"></td>
                 <td><span ng-repeat="team in project.teamMembers">{{team.email}}</span></td>
-                <td><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                <td><a href="" ng-click="model.editProject($event, project)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
             </tr>
             </tbody>
         </table>
