@@ -32,14 +32,14 @@
                     url: '/admin',
                     controller: 'AdminCtrl',
                     controllerAs: 'admin',
-                    templateUrl: './src/dashboard/admin/index.html',
+                    templateUrl: './src/dashboard/admin/admin.html',
                     resolve: {isUser: isUser}
                 })
                 .state('dbd.user', {
                     url: '/user',
                     controller: 'UserCtrl',
                     controllerAs: 'user',
-                    templateUrl: './src/dashboard/user/index.html',
+                    templateUrl: './src/dashboard/user/user.html',
                     //resolve: {isUser: isUser}
                 });
 
