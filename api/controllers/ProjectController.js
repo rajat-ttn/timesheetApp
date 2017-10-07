@@ -7,7 +7,7 @@ module.exports = {
         Project
             .find({isDeleted: {$ne: true}})
             .then(projects => {
-                return res.json({ data: { projects }})
+                return res.json({ data: projects})
             })
             .catch(err => {
                 sails.log.error(`error ${err} occured while fetching all projects`);
@@ -25,7 +25,7 @@ module.exports = {
               }
               regionProjectMap[project.region].push({projectId: project.id, projectName:project.name});
             })
-            return res.json({ data: { regionProjectMap }})
+            return res.json({ data: regionProjectMap})
         })
         .catch(err => {
           sails.log.error(`error ${err} occured while fetching region map`);
@@ -40,7 +40,7 @@ module.exports = {
         Project
             .updateOne({id: projectId},{isDeleted: true})
             .then(projects => {
-                return res.json({data: { projects }})
+                return res.json({data: projects})
             })
             .catch(err => {
                 sails.log.error(`error ${err} occured while deleting project`);
@@ -67,9 +67,9 @@ module.exports = {
         
         if(inputData.action === 'create'){
             Project
-                .create({id: projectId},{isDeleted: true})
+                .create(payload)
                 .then(project => {
-                    return res.json({ data: { project} })
+                    return res.json({ data: true })
                 })
                 .catch(err => {
                     sails.log.error(`error ${err} occured while deleting project`);
@@ -78,8 +78,8 @@ module.exports = {
         } else {
             Project
                 .updateOne({id: projectId}, payload)
-                .then(projects => {
-                    return res.json({data: { project } })
+                .then(project => {
+                    return res.json({data: project })
                 })
                 .catch(err => {
                     sails.log.error(`error ${err} occured while deleting project`);
