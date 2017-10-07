@@ -55,11 +55,11 @@ module.exports = {
                 , client: { name: inputData['clientName'] }
                 , region: inputData['region']
                 , emailConfig: {
-                    subject: inputData['subject']
-                    , to: inputData['to']
-                    , cc: inputData['cc']
-                    , bcc: inputData['bcc']
-                    , dailyStatusEnabled: inputData['dailyStatusEnabled']
+                    subject: inputData['emailConfig']['subject'] || ''
+                    , to: inputData['emailConfig']['to'] || ''
+                    , cc: inputData['emailConfig']['cc'] || ''
+                    , bcc: inputData['emailConfig']['bcc'] || ''
+                    , dailyStatusEnabled: inputData['emailConfig']['dailyStatusEnabled'] || true
                 }
                 , teamMembers: inputData['teamMembers']
                 , logWorkCutOffTime: inputData['cutOffTime']

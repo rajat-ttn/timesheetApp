@@ -65,8 +65,9 @@ module.exports = {
     },
 
     downloadSheet: function (req, res) {
-        let fileName = req.params['fileName']
-            , filePath = sails.config.sheetsPath + fileName;
+        let inputData = req.params.all()
+            , fileName = inputData['fileName']
+            , filePath = './excelSheets' + '/' + fileName;
         ;
 
         try{
@@ -74,11 +75,22 @@ module.exports = {
             if(fileName && fs.existsSync(filePath)){
                 res.download(filePath);
             } else {
-                return res.serverError('Error occurred while downloading spreadSheets');
+                let payload = {
+                    fileName: fileName
+                    , userId: inputData['userId']
+                    , projectId: inputData['projectId']
+                    , startDate: inputData['startDate']
+                    , endDate: inputData['endDate']
+                    , projectName: inputData['projectName']
+                    , clientName: inputData['clientName']
+                    , teamMembers: inputData['teamMembers']
+                }
+                EntryService.generateFile(payload);
+                return res.json();
             }
         }
         catch(err){
-            sails.log.error(`Error while trying to ${action} document whose
+            sails.log.error(`Error while trying to download file whose
              fileName is ${fileName} and giving error: ${err}`);
             res.serverError('Error occurred while downloading spreadSheets');
         }
