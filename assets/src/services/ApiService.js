@@ -65,5 +65,4 @@ class ApiService {
     }
 }
 
-angular.module("timeSheet")
-    .service("ApiService", ApiService);
+angular.module("timeSheet").service("ApiService", ApiService);

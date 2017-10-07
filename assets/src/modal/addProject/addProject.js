@@ -52,5 +52,4 @@ class addProject {
     }
 }
 
-
 angular.module("timeSheet").controller('addProject', addProject);

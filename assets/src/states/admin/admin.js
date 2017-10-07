@@ -18,7 +18,6 @@ const Project = {
 class AdminCtrl {
     constructor(ApiService, UserService, $state, ngDialog, $mdDialog) {
         'ngInject';
-
         //this.User = User;
         this.ApiService = ApiService;
         this.UserService = UserService;
@@ -42,27 +41,24 @@ class AdminCtrl {
          this.showAdvanced(ev, project);
      }
 
-
     logout() {
         this.UserService.logout();
     };
 
-
     showAdvanced(ev, project) {
-    this.$mdDialog.show({
-        controller: 'addProject',
-        controllerAs: 'model',
-        templateUrl: 'src/modal/addProject/addProject.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        locals: {
-            project: project || angular.copy(Project)
-        },
-        // fullscreen: customFullscreen // Only for -xs, -sm breakpoints.
+        this.$mdDialog.show({
+            controller: 'addProject',
+            controllerAs: 'model',
+            templateUrl: 'src/modal/addProject/addProject.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                project: project || angular.copy(Project)
+            },
+            // fullscreen: customFullscreen // Only for -xs, -sm breakpoints.
         });
     }
 }
-
 
 angular.module("timeSheet").controller('AdminCtrl', AdminCtrl);

@@ -26,6 +26,4 @@ class DashboardCtrl {
     }
 }
 
-angular
-    .module('timeSheet')
-    .controller('DashboardCtrl', DashboardCtrl);
+angular.module('timeSheet').controller('DashboardCtrl', DashboardCtrl);

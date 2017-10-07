@@ -58,14 +58,6 @@ class addTask {
                 this.saving = false;
             })
     }
-
-
-    save(project) {
-        console.log('runnnn');
-    }
-
-    /**/
 }
-
 
 angular.module("timeSheet").controller('addTask', addTask);

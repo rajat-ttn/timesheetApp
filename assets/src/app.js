@@ -52,18 +52,12 @@
 
             function isUser(UserService, $state) {
 
-                if (UserService.getUser()) {
-                    //$state.go('dbd');
-                    // this.$state.go('dbd.user');
-                }
-                else {
+                if (!UserService.getUser() || !UserService.getToken()) {
                     $state.go('login');
                 }
                 return UserService.getUser();
             }
 
-        }).config(function($mdThemingProvider) {
-        $mdThemingProvider.theme('default')
-            .accentPalette('blue');
-    });
+        })
+        .config(($mdThemingProvider) => $mdThemingProvider.theme('default').accentPalette('blue'));
 })();
