@@ -77,7 +77,6 @@ module.exports = {
             } else {
                 let payload = {
                     fileName: fileName
-                    , userId: inputData['userId']
                     , projectId: inputData['projectId']
                     , startDate: inputData['startDate']
                     , endDate: inputData['endDate']

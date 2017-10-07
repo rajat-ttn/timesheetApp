@@ -11,14 +11,26 @@
 
              collection
                  .find(
-                     {userId: payload.userId, projectId: payload.projectId,
-                         entryDay: { $gte: new Date('2017-10-01'), $lte: new Date('2017-10-30') }
+                     {projectId: payload.projectId,
+                         entryDay: { $gte: new Date(payload.startDate), $lte: new Date(payload.endDate) }
                      }
-                     , { _id: 0, entryDay: 1, workHours: 1, tasks: 1 }
                  )
                  .sort({entryDay: 1})
                  .toArray(function (err, results) {
                      if (err) return res.serverError();
+                     
+                     sails.log.info(results);
+                     
+                     let updatedResults = {};
+                     results.map(function (data) {
+                         if(updatedResults[data['userId']]){
+                             updatedResults[data['userId']].push(data);
+                         } else {
+                             updatedResults[data['userId']] = [data];
+                         }
+                     });
+                     sails.log.error(updatedResults);
+                     
                      return EntryService.getFormattedData(payload, results);
                  });
          });
