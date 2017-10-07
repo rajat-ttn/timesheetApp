@@ -26,6 +26,8 @@ class addProject {
         this.project = Project;
         this.filter = true;
         this.tagsTo = [];
+        this.tagsCc = [];
+        this.tagsBcc = [];
     }
 
     getRegion() {

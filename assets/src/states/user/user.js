@@ -19,7 +19,6 @@ class UserCtrl {
                 this.tasks = this.setData(resp.data);
             })
     }
-
 }
 
 angular.module("timeSheet")

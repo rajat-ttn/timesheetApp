@@ -32,6 +32,13 @@ class ApiService {
             })
     }
 
+    sendTask(obj) {
+        return this.$http.post('/entry/create',obj)
+            .then(resp => {
+                return resp;
+            })
+    }
+
     getUsers(query) {
         let params;
         if(query) {

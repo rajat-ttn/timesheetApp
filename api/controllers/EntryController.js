@@ -11,24 +11,24 @@ let moment = require('moment')
          payload = {
              userId: inputData['userId']
              , projectId: inputData['projectId']
-             , workHours: inputData['workHours']
+             , workHours: parseInt(inputData['workHours'], 10)
              , tasks: inputData['tasks']
-             , entryDay: inputData['entryDay'].moment().format('l').utc().startOf('day').toString()
+             , entryDay: new Date(inputData['entryDay'])
          }
 
          if(inputData['action'] === 'create'){
-             Entry
-                 .insertOne(payload)
-                 .then(entries => {
-                     return res.json({ data: true })
+             DayEntry
+                 .create(payload)
+                 .then(entry => {
+                     return res.json({ data: entry })
                  })
                  .catch(err => {
                      sails.log.error(`error ${err} occured while inserting a new entry`);
                      return res.serverError();
                  })
          } else {
-             Entry
-                 .updateOne({ userId: payload.userId, projectId: payload.projectId, entryDay: new Date(payload.entryDay)}, payload)
+             DayEntry
+                 .update({ userId: payload.userId, projectId: payload.projectId, entryDay: new Date(payload.entryDay)}, payload)
                  .then(updatedEntry => {
                      return res.json({ data: updatedEntry })
                  })

@@ -73,7 +73,7 @@ module.exports = {
             Project
                 .create(payload)
                 .then(project => {
-                    return res.json({ data: true })
+                    return res.json({ data: project })
                 })
                 .catch(err => {
                     sails.log.error(`error ${err} occured while creating project`);
