@@ -13,16 +13,19 @@
             }
         };
 
-        function calendarController($scope,$element) {
+        function calendarController($scope,$element,$mdDialog) {
             let vm = $scope.model;
 
             function run(){
                 $($element).fullCalendar({
                     dayClick: function(date, jsEvent, view) {
-                        eventas = {};
-                        eventas.title = "CLICKED!";
-                        eventas.start = date.format();
-                        $($element).fullCalendar('renderEvent', eventas);
+                        $mdDialog.show({
+                            controller: 'addTask',
+                            controllerAs: 'model',
+                            templateUrl: 'src/modal/addTask/addTask.html',
+                            parent: angular.element(document.body),
+                            clickOutsideToClose:true
+                        });
                     },
                     header: {
                         left: 'prev,next today',
@@ -101,7 +104,7 @@
             };
         }
 
-        calendarController.$inject = ['$scope','$element'];
+        calendarController.$inject = ['$scope','$element','$mdDialog'];
 
         return CDO;
     }

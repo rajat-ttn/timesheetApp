@@ -7,13 +7,14 @@ let moment = require('moment')
         var inputData = req.params.all()
             , payload = {}
             ;
+         console.log('entry day : ' + inputData['entryDay']);
 
          payload = {
              userId: inputData['userId']
              , projectId: inputData['projectId']
              , workHours: inputData['workHours']
              , tasks: inputData['tasks']
-             , entryDay: inputData['entryDay'].moment().format('l').utc().startOf('day').toString()
+             , entryDay: moment(inputData['entryDay']).utc().startOf('day').format('l')
          }
 
          if(inputData['action'] === 'create'){

@@ -1,0 +1,33 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Mango (Fruit)</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <select ng-model="model.obj.projectId" ng-options="item.id as item.name for item in model.projects track by $index"></select><br>
+            <input type="text" ng-repeat="task in model.obj.tasks track by $index" ng-model="model.obj.tasks[$index]" placeholder="Task"> <button ng-click="model.add()">add</button> <br>
+            <input type="text" ng-model="model.obj.workHours"  placeholder="Work Hours"><br>
+            <md-datepicker ng-model="model.obj.entryDay"></md-datepicker>
+            <button ng-click="model.sendTask()">Send Task</button>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button md-autofocus>
+                More
+            </md-button>
+            <span flex></span>
+            <md-button>
+                Not Useful
+            </md-button>
+            <md-button>
+                Useful
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
