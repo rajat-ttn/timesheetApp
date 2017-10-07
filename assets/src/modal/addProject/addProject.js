@@ -24,6 +24,8 @@ class addProject {
         this.UserService = UserService;
         this.$state = $state;
         this.project = Project;
+        this.filter = true;
+        this.tagsTo = [];
     }
 
     getRegion() {
@@ -38,7 +40,7 @@ class addProject {
     loadUsers($query) {
         return this.ApiService.getUsers($query)
             .then(resp => {
-                return resp;
+                return resp.data;
             });
     }
 
