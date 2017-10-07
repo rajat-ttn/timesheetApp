@@ -38,6 +38,12 @@ sails.loadAsync({
       cron.schedule('*/5 * * * *', function () {
         checkDailyMailsToBeSent(projects);
       });
+
+      //running a task on 1st day of every month
+      cron.schedule('0 0 1 * *', function () {
+        checkDailyMailsToBeSent(projects);
+      });
+
     })
 }).catch(function (err) {
   console.log('error ocurred' + err);
@@ -79,5 +85,17 @@ function checkDailyMailsToBeSent(projects) {
           })
       }
     }
+  })
+}
+
+
+function generateExcelSheetForAllProjects(projects){
+  return Promise.map(projects, function(){
+   //happyPath
+    sender.send({
+      entity: 'timesheetApp',
+      queue: 'createSpreadSheet',
+      msg: {project}
+    });
   })
 }
