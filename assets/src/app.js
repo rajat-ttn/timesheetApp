@@ -37,6 +37,14 @@
                     controllerAs: 'model',
                     templateUrl: './src/states/user/user.html',
                     resolve: {User: isUser}
+                })
+
+                .state('dbd.sheet', {
+                    url: '/sheets',
+                    controller: 'SheetCtrl',
+                    controllerAs: 'model',
+                    templateUrl: './src/states/sheet/sheet.html',
+                    resolve: {User: isUser}
                 });
 
 

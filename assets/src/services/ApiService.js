@@ -11,6 +11,13 @@ class ApiService {
             })
     }
 
+    getTaskList() {
+        return this.$http.get('/entry/getList')
+            .then(resp => {
+                return resp;
+            })
+    }
+
     getRegion() {
         return this.$http.get('/project/getRegionMap')
             .then(resp => {
