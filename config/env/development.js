@@ -29,8 +29,8 @@ module.exports = {
     , secureConnection: false
     , port: 587
     , auth: {
-      user: "maxlifeemail@gmail.com"
-      , pass: "max@life"
+      user: "timesheetttn@gmail.com"
+      , pass: "time@123"
     }
   }
 
