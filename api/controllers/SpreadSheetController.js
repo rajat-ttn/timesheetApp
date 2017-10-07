@@ -6,7 +6,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const Promise = require('bluebird');
+const Promise = require('bluebird')
+    , fs = require('fs')
+    ;
 
 module.exports = {
 
@@ -65,7 +67,7 @@ module.exports = {
   },
 
   downloadSheet: function (req, res) {
-    let inputData = req.params.all()
+    let inputData = req.body
       , fileName = inputData['fileName']
       , filePath = './excelSheets' + '/' + fileName;
 
@@ -74,7 +76,7 @@ module.exports = {
         res.download(filePath);
       } else {
         Project
-          .find({id: inputData.projectId})
+          .findOne({id: inputData.projectId})
           .then(function (project) {
               project.filePath = filePath;
             return getProjectInfoForMonth(project, inputData.startDate, inputData.endDate);
@@ -96,10 +98,9 @@ module.exports = {
 
 
 function getProjectInfoForMonth(project, startDate, endDate) {
-
   const projectInfo = {
     projectName:project.name,
-    clientName:project.clientName,
+    clientName:project.client.name,
     teamMembers:project.teamMembers,
     startDate:startDate,
     endDate:endDate,
@@ -109,14 +110,13 @@ function getProjectInfoForMonth(project, startDate, endDate) {
 
     DayEntry.native(function (err, collection) {
       if (err) return res.serverError();
-
       collection
         .find(
           {
             projectId: project.id,
             entryDay: {
-              $gte: startDate,
-              $lte: endDate
+              $gte: new Date(startDate),
+              $lte: new Date(endDate)
             }
           })
         .sort({entryDay: 1})
@@ -140,15 +140,14 @@ function getProjectInfoForMonth(project, startDate, endDate) {
     })
   })
     .then(function(projectInfo){
-
       const dateRange = {
-        startDate: projectInfo.startDate,
-        endDate: projectInfo.endDate
+        start: projectInfo.startDate,
+        end: projectInfo.endDate
       };
 
       return new Promise(function(resolve, reject){
         const workbook = ExcelService.createWorkbook(projectInfo, dateRange);
-        createExcelFile(`{projectInfo.filePath}.xlsx`, workbook)
+          ExcelService.createExcelFile(`${projectInfo.filePath}.xlsx`, workbook)
           .then(function () {
             console.log('excel file successfully generated');
             resolve('excel file successfully generated');
