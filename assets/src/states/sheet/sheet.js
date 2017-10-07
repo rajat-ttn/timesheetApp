@@ -32,6 +32,16 @@ class SheetCtrl {
             });
         }
     }
+
+    download(project, fileName) {
+        const data = {
+            fileName: fileName,
+            projectId: project.projectId,
+            startDate: `${this.filter.year}-${this.months.indexOf(this.filter.month)+1}-01`, //'2017-10-01',
+            endDate: `${this.filter.year}-${this.months.indexOf(this.filter.month)+1}-31`,//'2017-10-31',
+        };
+        this.ApiService.download(data);
+    }
 }
 
 angular.module("timeSheet")

@@ -63,6 +63,10 @@ class ApiService {
                 return resp;
             })
     }
+
+    download(data) {
+        this.$http.post('/spreadsheet/download', data)
+    }
 }
 
 angular.module("timeSheet")
