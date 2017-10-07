@@ -1,8 +1,8 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog>
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Mango (Fruit)</h2>
+                <h2>{{model.obj.entryDay | date:'dd'}}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                 </md-button>
@@ -10,24 +10,38 @@
         </md-toolbar>
 
         <md-dialog-content>
-            <select ng-model="model.obj.projectId" ng-options="item.id as item.name for item in model.projects track by $index"></select><br>
-            <input type="text" ng-repeat="task in model.obj.tasks track by $index" ng-model="model.obj.tasks[$index]" placeholder="Task"> <button ng-click="model.add()">add</button> <br>
-            <input type="text" ng-model="model.obj.workHours"  placeholder="Work Hours"><br>
-            <md-datepicker ng-model="model.obj.entryDay"></md-datepicker>
-            <button ng-click="model.sendTask()">Send Task</button>
+            <div layout="column" ng-cloak class="md-inline-form">
+
+                <md-content layout-padding>
+                    <md-input-container class="md-block">
+                        <label>Projects</label>
+                        <md-select ng-model="model.obj.projectId" >
+                            <md-optgroup label="items">
+                                <md-option ng-value="item.id" ng-repeat="item in model.projects track by $index">{{item.name}}</md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" ng-repeat="task in model.obj.tasks track by $index">
+                        <label>Task {{$index+1}}</label>
+                        <input ng-model="model.obj.tasks[$index]">
+                    </md-input-container>
+                    <md-button ng-click="model.add()">Add Project</md-button>
+
+                    <md-input-container>
+                        <label>Work Hours</label>
+                        <input ng-model="model.obj.workHours">
+                    </md-input-container>
+                    <!--<select ng-model="model.obj.projectId" ng-options="item.id as item.name for item in model.projects track by $index"></select><br>-->
+                    <!--<input type="text" ng-repeat="task in model.obj.tasks track by $index" ng-model="model.obj.tasks[$index]" placeholder="Task"> <button ng-click="model.add()">add</button> <br>-->
+                    <!--<input type="text" ng-model="model.obj.workHours"  placeholder="Work Hours"><br>-->
+                    <!--<md-datepicker ng-model="model.obj.entryDay"></md-datepicker>-->
+                </md-content>
+                </div>
         </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-            <md-button md-autofocus>
-                More
-            </md-button>
-            <span flex></span>
-            <md-button>
-                Not Useful
-            </md-button>
-            <md-button>
-                Useful
-            </md-button>
+        <md-dialog-actions layout="row" layout-align="center center">
+            <md-button ng-click="model.sendTask()" class="md-block">Add Task</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

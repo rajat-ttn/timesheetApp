@@ -25,7 +25,10 @@
                             templateUrl: 'src/modal/addTask/addTask.html',
                             parent: angular.element(document.body),
                             targetEvent: jsEvent,
-                            clickOutsideToClose:true
+                            clickOutsideToClose:true,
+                            locals : {
+                                date : date
+                            }
                         });
                     },
                     header: {

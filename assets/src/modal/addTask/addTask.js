@@ -1,21 +1,19 @@
-
-const obj = {
-    projectId : null,
-    tasks : [''],
-    workHours : null,
-    entryDay : null
-};
-
 class addTask {
-    constructor(ApiService, UserService, $state) {
+    constructor(ApiService, UserService, $state, $mdDialog, date) {
         'ngInject';
         //this.User = User;
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$state = $state;
-        this.obj = obj;
+        this.obj = {
+            projectId : null,
+            tasks : [''],
+            workHours : null,
+            entryDay : date
+        };
         this.getProjects();
         this.user = UserService.getUser();
+        this.$mdDialog = $mdDialog;
     }
 
     getRegion() {
@@ -30,7 +28,13 @@ class addTask {
     sendTask(){
         this.obj.userId = this.user.id;
         this.ApiService.sendTask(this.obj).then(resp => {
-            console.log(resp);
+            this.obj = {
+                projectId : null,
+                tasks : [''],
+                workHours : null,
+                entryDay : null
+            };
+            this.$mdDialog.cancel();
         });
     }
 

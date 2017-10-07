@@ -1,10 +1,10 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog flex="30 10">
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Add Project</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
+                <md-button class="md-icon-button" ng-click="model.cancel()">
                 </md-button>
             </div>
         </md-toolbar>
@@ -77,7 +77,7 @@
 
                             <md-input-container class="md-block">
                                 <label>Subject</label>
-                                <input ng-model="model.project.clientName">
+                                <input ng-model="model.emailConfig.subject">
                             </md-input-container>
 
                             <md-contact-chips
@@ -109,15 +109,11 @@
                         </form>
                     </div>
                 </md-content>
-
             </div>
-
         </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-
-            <span flex></span>
-            <md-button ng-click="model.save(model.project)">Add Project</md-button>
+        <md-dialog-actions layout="row" layout-align="center center">
+            <md-button ng-click="model.save(model.project);cancel()">Add Project</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

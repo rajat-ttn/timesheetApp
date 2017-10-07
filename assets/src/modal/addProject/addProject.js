@@ -76,10 +76,6 @@ class addProject {
             });
     }
 
-    fuck(){
-     console.log('fuckkkk');
-    }
-
     /**/
 }
 
