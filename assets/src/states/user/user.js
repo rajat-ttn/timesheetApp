@@ -7,7 +7,7 @@ class UserCtrl {
         this.getTaskList();
     }
 
-    setData(tasks) {
+    setData(tasks=[]) {
         tasks.forEach(task => {
             task.start = moment().format(task.entryDay).format('MM-DD-YYYYY');
         })
