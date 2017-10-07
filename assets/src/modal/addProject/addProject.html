@@ -10,34 +10,19 @@
         </md-toolbar>
 
         <md-dialog-content>
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-8">
-                    <form class="form-horizontal">
-                        <div class="form-group" name="model.project_form">
                             <label class="col-sm-4 control-label">Project Name</label>
-                            <div class="col-sm-8">
                                 <input type="text" ng-model="model.project.projectName" class="form-control"
                                        placeholder="Project Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-4 control-label">Client Name</label>
-                            <div class="col-sm-8">
                                 <input type="text" ng-model="model.project.clientName" class="form-control"
                                        placeholder="Client Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-4 control-label">Region Name</label>
-                            <div class="col-sm-8">
                                 <input type="text" ng-model="model.project.region" class="form-control"
                                        placeholder="Region Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-4 control-label">Client Config</label>
-                            <div class="col-sm-6">
                                 <div class="checkbox">
                                     <label>
                                         <input ng-model="model.project.emailConfig.dailyStatusEnabled" type="checkbox">
@@ -45,11 +30,8 @@
                                         Email
                                     </label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-4 control-label"></label>
-                            <div class="col-sm-6">
                                 <tags-input
                                         ng-model="model.tagsTo"
                                         display-property="email"
@@ -65,16 +47,9 @@
                                             max-results-to-show="10"
                                     ></auto-complete>
                                 </tags-input>
-                                <!--<input type="text" ng-model="model.project.emailConfig.to" class="form-control" placeholder="Too">-->
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
+
+
                             <label class="col-sm-4 control-label"></label>
-                            <div class="col-sm-6">
                                 <tags-input
                                         ng-model="model.tagsCc"
                                         display-property="email"
@@ -90,16 +65,9 @@
                                             max-results-to-show="10"
                                     ></auto-complete>
                                 </tags-input>
-                                <!--<input type="text" class="form-control" placeholder="Cc">-->
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
+
+
                             <label class="col-sm-4 control-label"></label>
-                            <div class="col-sm-6">
                                 <tags-input
                                         ng-model="model.tagsBcc"
                                         display-property="email"
@@ -115,24 +83,13 @@
                                             max-results-to-show="10"
                                     ></auto-complete>
                                 </tags-input>
-                                <!--<input type="text" class="form-control" placeholder="Bcc">-->
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label"></label>
-                            <div class="col-sm-8">
+
+
                                 <input type="text" ng-model="model.project.emailConfig.subject" class="form-control"
                                        placeholder="Subject">
-                            </div>
 
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-4 control-label">Team</label>
-                            <div class="col-sm-6">
                                 <tags-input
                                         ng-model="model.project.teamMembers"
                                         display-property="name"
@@ -149,46 +106,19 @@
                                             max-results-to-show="10"
                                     ></auto-complete>
                                 </tags-input>
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Dev
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
+
+
                             <label class="col-sm-4 control-label">Cut Off</label>
-                            <div class="col-sm-8">
-                                <input type="text" ng-model="model.project.logWorkCutOffTime" class="form-control"
-                                       placeholder="Cut Off">
-                            </div>
-                        </div>
+                                <md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>
 
-                        <div class="form-group">
                             <label class="col-sm-4 control-label">Start Date</label>
-                            <div class="col-sm-8">
-                                <input type="text" ng-model="model.project.startDate" class="form-control"
-                                       placeholder="Cut Off">
-                            </div>
-                        </div>
+                                <md-datepicker ng-model="model.project.startDate"></md-datepicker>
 
-                        <div class="form-group">
                             <label class="col-sm-4 control-label">End Date</label>
-                            <div class="col-sm-8">
-                                <input type="text" ng-model="model.project.endDate" class="form-control"
-                                       placeholder="Cut Off">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-10">
+                                <md-datepicker ng-model="model.project.endDate"></md-datepicker>
                                 <button type="submit" ng-click="model.save(model.project)"
                                         class="btn btn-default">Add Project
                                 </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-2"></div>
-            </div>
 
         </md-dialog-content>
 

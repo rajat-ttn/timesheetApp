@@ -13,14 +13,14 @@ body {
 .clear-fix {
   clear: both; }
 
-table {
+table.admin {
   width: 100%;
   text-align: left;
   border-collapse: collapse; }
-  table th, table td {
+  table.admin th, table.admin td {
     padding: 10px;
     border: 1px solid #eeeeee; }
-  table tr:nth-child(even) {
+  table.admin tr:nth-child(even) {
     background: #eeeeee; }
 
 .admin {
