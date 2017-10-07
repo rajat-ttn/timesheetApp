@@ -56,12 +56,10 @@
             <tbody>
                 <tr ng-repeat="project in model.regions[model.filter.region] track by $index">
                     <td>
-                        <a href="" ng-click="model.download(project, model.files[$index])">{{ model.files[$index] }}.xlsx</a>
+                        <a href="" ng-click="model.download(project, model.files[$index])">{{ model.files[$index] }}</a>
                     </td>
                 </tr>
             </tbody>
-
-
         </table>
 
     </md-card-content>
