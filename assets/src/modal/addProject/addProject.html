@@ -2,7 +2,7 @@
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Mango (Fruit)</h2>
+                <h2>Add Project</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                 </md-button>
@@ -10,97 +10,80 @@
         </md-toolbar>
 
         <md-dialog-content>
-            <div>
-
-                <label class="col-sm-4 control-label"></label>
-                <tags-input
-                        ng-model="model.tagsTo"
-                        display-property="email"
-                        placeholder="To"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
+            <!--<div>-->
 
 
-                <label class="col-sm-4 control-label"></label>
-                <tags-input
-                        ng-model="model.tagsCc"
-                        display-property="email"
-                        placeholder="Cc"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
+                <!--<label class="col-sm-4 control-label"></label>-->
+                <!--<tags-input-->
+                        <!--ng-model="model.tagsCc"-->
+                        <!--display-property="email"-->
+                        <!--placeholder="Cc"-->
+                        <!--replace-spaces-with-dashes="false"-->
+                <!--&gt;-->
+                    <!--<auto-complete-->
+                            <!--source="model.loadUsers($query)"-->
+                            <!--debounce-delay="50"-->
+                            <!--min-length="0"-->
+                            <!--load-on-focus="true"-->
+                            <!--load-on-empty="true"-->
+                            <!--max-results-to-show="10"-->
+                    <!--&gt;</auto-complete>-->
+                <!--</tags-input>-->
 
 
-                <label class="col-sm-4 control-label"></label>
-                <tags-input
-                        ng-model="model.tagsBcc"
-                        display-property="email"
-                        placeholder="Bcc"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
+                <!--<label class="col-sm-4 control-label"></label>-->
+                <!--<tags-input-->
+                        <!--ng-model="model.tagsBcc"-->
+                        <!--display-property="email"-->
+                        <!--placeholder="Bcc"-->
+                        <!--replace-spaces-with-dashes="false"-->
+                <!--&gt;-->
+                    <!--<auto-complete-->
+                            <!--source="model.loadUsers($query)"-->
+                            <!--debounce-delay="50"-->
+                            <!--min-length="0"-->
+                            <!--load-on-focus="true"-->
+                            <!--load-on-empty="true"-->
+                            <!--max-results-to-show="10"-->
+                    <!--&gt;</auto-complete>-->
+                <!--</tags-input>-->
 
 
-                <input type="text" ng-model="model.project.emailConfig.subject" class="form-control"
-                       placeholder="Subject">
+                <!--<input type="text" ng-model="model.project.emailConfig.subject" class="form-control"-->
+                       <!--placeholder="Subject">-->
 
 
-                <label class="col-sm-4 control-label">Team</label>
-                <tags-input
-                        ng-model="model.project.teamMembers"
-                        display-property="name"
-                        placeholder="Add a user"
-                        add-from-autocomplete-only="true"
-                        replace-spaces-with-dashes="false"
-                >
-                    <auto-complete
-                            source="model.loadUsers($query)"
-                            debounce-delay="50"
-                            min-length="0"
-                            load-on-focus="true"
-                            load-on-empty="true"
-                            max-results-to-show="10"
-                    ></auto-complete>
-                </tags-input>
+                <!--<label class="col-sm-4 control-label">Team</label>-->
+                <!--<tags-input-->
+                        <!--ng-model="model.project.teamMembers"-->
+                        <!--display-property="name"-->
+                        <!--placeholder="Add a user"-->
+                        <!--add-from-autocomplete-only="true"-->
+                        <!--replace-spaces-with-dashes="false"-->
+                <!--&gt;-->
+                    <!--<auto-complete-->
+                            <!--source="model.loadUsers($query)"-->
+                            <!--debounce-delay="50"-->
+                            <!--min-length="0"-->
+                            <!--load-on-focus="true"-->
+                            <!--load-on-empty="true"-->
+                            <!--max-results-to-show="10"-->
+                    <!--&gt;</auto-complete>-->
+                <!--</tags-input>-->
 
 
-                <label class="col-sm-4 control-label">Cut Off</label>
-                <md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>
+                <!--<label class="col-sm-4 control-label">Cut Off</label>-->
+                <!--<md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>-->
 
-                <label class="col-sm-4 control-label">Start Date</label>
-                <md-datepicker ng-model="model.project.startDate"></md-datepicker>
+                <!--<label class="col-sm-4 control-label">Start Date</label>-->
+                <!--<md-datepicker ng-model="model.project.startDate"></md-datepicker>-->
 
-                <label class="col-sm-4 control-label">End Date</label>
-                <md-datepicker ng-model="model.project.endDate"></md-datepicker>
-                <button type="submit" ng-click="model.save(model.project)"
-                        class="btn btn-default">Add Project
-                </button>
-            </div>
+                <!--<label class="col-sm-4 control-label">End Date</label>-->
+                <!--<md-datepicker ng-model="model.project.endDate"></md-datepicker>-->
+                <!--<button type="submit" ng-click="model.save(model.project)"-->
+                        <!--class="btn btn-default">Add Project-->
+                <!--</button>-->
+            <!--</div>-->
 
             <div layout="column" ng-cloak class="md-inline-form">
 
@@ -143,7 +126,7 @@
                             </md-contact-chips>
 
                             <md-contact-chips
-                                    ng-model="model.tagsTo"
+                                    ng-model="model.tagsCc"
                                     md-contacts="model.loadUsers($query)"
                                     md-contact-name="name"
                                     md-contact-image="image"

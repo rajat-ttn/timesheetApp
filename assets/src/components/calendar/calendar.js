@@ -24,6 +24,7 @@
                             controllerAs: 'model',
                             templateUrl: 'src/modal/addTask/addTask.html',
                             parent: angular.element(document.body),
+                            targetEvent: jsEvent,
                             clickOutsideToClose:true
                         });
                     },

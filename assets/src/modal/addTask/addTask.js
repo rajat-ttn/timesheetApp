@@ -15,6 +15,7 @@ class addTask {
         this.$state = $state;
         this.obj = obj;
         this.getProjects();
+        this.user = UserService.getUser();
     }
 
     getRegion() {
@@ -24,11 +25,10 @@ class addTask {
 
     add(){
        this.obj.tasks.push('');
-        console.log(this.obj);
     }
 
     sendTask(){
-        console.log(this.obj);
+        this.obj.userId = this.user.id;
         this.ApiService.sendTask(this.obj).then(resp => {
             console.log(resp);
         });

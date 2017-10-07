@@ -5,7 +5,6 @@ class UserCtrl {
         this.UserService = UserService;
         this.$state = $state;
     }
-
 }
 
 angular.module("timeSheet")
