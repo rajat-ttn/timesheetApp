@@ -71,11 +71,11 @@ module.exports = {
   downloadSheet: function (req, res) {
     let inputData = req.body
       , fileName = inputData['fileName']
-      , filePath = './excelSheets' + '/' + fileName + '.xlsx';
+      , filePath = './excelSheets' + '/' + fileName;
 
     try {
-      if (fileName && fs.existsSync(filePath)) {
-        res.download(filePath);
+      if (fileName && fs.existsSync(filePath +  '.xlsx')) {
+        res.download(filePath + '.xlsx');
       } else {
         Project
           .findOne({id: inputData.projectId})
@@ -83,11 +83,9 @@ module.exports = {
               project.filePath = filePath;
             return getProjectInfoForMonth(project, inputData.startDate, inputData.endDate);
           })
-            .then(function () {
-                return res.download(filePath)
-            })
-        //EntryService.generateFile(payload);
-        //return res.download(filePath);
+          .then(function () {
+              return res.download(filePath +  '.xlsx')
+          })
       }
     }
     catch (err) {
