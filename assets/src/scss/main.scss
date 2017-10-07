@@ -11,10 +11,30 @@
 
 body{
   font-family: 'Quicksand', sans-serif;
-  padding-top: 70px;
 }
 .clear-fix{
   clear: both;
+}
+
+table{
+  width:100%;
+  text-align:left;
+  border-collapse:collapse;
+  th,td{
+    padding:10px;
+    border: 1px solid #eeeeee;
+  }
+  tr{
+    &:nth-child(even){
+      background : #eeeeee;
+    }
+  }
+}
+
+.admin{
+  width: 100%;
+  margin: 20px auto;
+  max-width: 800px;
 }
 
 @import "../states/login/login";

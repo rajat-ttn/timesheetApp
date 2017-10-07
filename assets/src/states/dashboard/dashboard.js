@@ -18,7 +18,6 @@ class DashboardCtrl {
             .then(resp => {
                 this.User = resp.data;
                 this.UserService.setUser(resp.data);
-                this.$state.go('dbd.user');
             })
     }
 
