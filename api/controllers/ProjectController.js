@@ -1,6 +1,8 @@
 "use strict";
 
-const _ = require('lodash');
+const _ = require('lodash')
+    , moment = require('moment')
+    ;
 
 module.exports = {
     getAllProjects: (req, res) => {
@@ -63,6 +65,8 @@ module.exports = {
                 }
                 , teamMembers: inputData['teamMembers']
                 , logWorkCutOffTime: inputData['cutOffTime']
+                /*, startDate: moment(inputData['startDate']).format('l')
+                , endDate: moment(inputData['endDate']).format('l')*/
             }
         
         if(inputData.action === 'create'){
@@ -72,7 +76,7 @@ module.exports = {
                     return res.json({ data: true })
                 })
                 .catch(err => {
-                    sails.log.error(`error ${err} occured while deleting project`);
+                    sails.log.error(`error ${err} occured while creating project`);
                     return res.serverError();
                 })
         } else {
@@ -82,7 +86,7 @@ module.exports = {
                     return res.json({data: project })
                 })
                 .catch(err => {
-                    sails.log.error(`error ${err} occured while deleting project`);
+                    sails.log.error(`error ${err} occured while updating project`);
                     return res.serverError();
                 })
         }
