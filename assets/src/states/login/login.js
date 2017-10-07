@@ -3,6 +3,7 @@ class LoginCtrl {
         'ngInject';
         this.ApiService = ApiService;
         this.UserService = UserService;
+        this.$state = $state;
     }
 
     login()  {

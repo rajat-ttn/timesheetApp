@@ -5,6 +5,7 @@ function APIInterceptor($rootScope, UserService, $state) {
     //'ngInject';
     return {
         request,
+        response,
         responseError
     };
 
@@ -22,5 +23,12 @@ function APIInterceptor($rootScope, UserService, $state) {
             //$rootScope.$broadcast('unauthorized');
         }
         return response
+    }
+
+    function response(response) {
+        if (!(/\.(htm?l|svg|css|js|png|map|jpe?g)$/i.test(response.config.url.toLowerCase())) && response.config.url != "http://api.kontex.com/login" && response.config.url != "http://api.kontex.com/profile") {
+            return response.data
+        }
+        return response;
     }
 }

@@ -1,5 +1,5 @@
 (function () {
-    angular.module("timeSheet", ['ui.router', 'ngResource'])
+    angular.module("timeSheet", ['ui.router', 'ngResource', 'ngTagsInput'])
 
         .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.interceptors.push('APIInterceptor');
@@ -22,7 +22,7 @@
                             controllerAs: 'model'
                         }
                     },
-                    resolve: {User: isUser}
+                    //resolve: {User: isUser}
                 })
                 .state('dbd.admin', {
                     url: '/admin',

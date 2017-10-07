@@ -10,6 +10,31 @@ class ApiService {
                 return resp;
             })
     }
+
+    getUsers(query) {
+        let params;
+        if(query) {
+            params = { params: {searchText:query}};
+        }
+        return this.$http.get('/user/getFilteredUsers', params)
+            .then(resp => {
+                return resp;
+            })
+    }
+
+    createProject(data) {
+        return this.$http.post('/project/create', data)
+            .then(resp => {
+                return resp;
+            })
+    }
+
+    updateProject(data) {
+        return this.$http.post('/project/update', data)
+            .then(resp => {
+                return resp;
+            })
+    }
 }
 
 angular.module("timeSheet")
