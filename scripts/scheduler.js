@@ -32,7 +32,7 @@ sails.loadAsync({
   },
 }).then(function (app) {
   return Project
-    .find({isDeleted: false})
+    .find({isDeleted: {$ne:true}})
     .then(function (projects) {
       //running a task every five minutes
       cron.schedule('*/5 * * * *', function () {
@@ -41,7 +41,7 @@ sails.loadAsync({
 
       //running a task on 1st day of every month
       cron.schedule('0 0 1 * *', function () {
-        checkDailyMailsToBeSent(projects);
+        generateExcelSheetForAllProjects(projects);
       });
 
     })
@@ -54,15 +54,17 @@ function checkDailyMailsToBeSent(projects) {
   const currentMs = moment.utc().valueOf();
   return Promise.map(projects, function (project) {
     //consider only those projects which are currently active.
-    const membersWhoseEntriesShouldBePresent = [];
+    //const membersWhoseEntriesShouldBePresent = [];
 
-    _.forEach(project.teamMembers, function (teamMember) {
-      if (curentMs >= teamMember.startDate.valueOf() && currentMs < teamMember.endDate.valueOf()) {
-        membersWhoseEntriesShouldBePresent.push(teamMember);
-      }
-    })
+//    _.forEach(project.teamMembers, function (teamMember) {
+//      if (curentMs >= teamMember.startDate.valueOf() && currentMs < teamMember.endDate.valueOf()) {
+//        //membersWhoseEntriesShouldBePresent.push(teamMember);
+//      }
+//    })
 
-    if(membersWhoseEntriesShouldBePresent.length === 0){
+    const membersWhoseEntriesShouldBePresent = _.map(project.teamMembers, 'id') || [];
+
+    if(membersWhoseEntriesShouldBePresent.length === 0 || !project.dailyStatusEnabled){
       return;
     }
 
@@ -71,9 +73,9 @@ function checkDailyMailsToBeSent(projects) {
       //consider only those projects whose logWorkCutOff has matured in last 5 mins;
       if (logWorkCutOffTimeMs <= currentMs && logWorkCutOffTimeMs > (currentMs - 5 * 60 * 1000)) {
         return DayEntry
-          .find({projectId: project.id})
+          .find({projectId: project.id, entryDay: moment(currentMs).startOf('day').toDate()})
           .then(function (dayEntries) {
-            const mandatoryPersonIds = _.map(membersWhoseEntriesShouldBePresent, 'id');
+            const mandatoryPersonIds = membersWhoseEntriesShouldBePresent //_.map(membersWhoseEntriesShouldBePresent, 'id');
             const idsOfUsersWhoLoggedWork = _.map(dayEntries, 'userId');
             const usersWhoDidntLogWork = _.intersection(mandatoryPersonIds, idsOfUsersWhoLoggedWork);
             //happyPath
