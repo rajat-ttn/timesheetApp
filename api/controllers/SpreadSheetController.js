@@ -6,7 +6,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const Promise = require('bluebird');
+const Promise = require('bluebird')
+    , ObjectID = require('mongodb').ObjectID
+    , fs = require('fs')
+    , moment = require('moment')
+    ;
 
 module.exports = {
 
@@ -65,25 +69,23 @@ module.exports = {
   },
 
   downloadSheet: function (req, res) {
-    let inputData = req.params.all()
+    let inputData = req.body
       , fileName = inputData['fileName']
       , filePath = './excelSheets' + '/' + fileName;
 
     try {
-      if (fileName && fs.existsSync(filePath)) {
-        res.download(filePath);
+      if (fileName && fs.existsSync(filePath +  '.xlsx')) {
+        res.download(filePath + '.xlsx');
       } else {
         Project
-          .find({id: inputData.projectId})
+          .findOne({id: inputData.projectId})
           .then(function (project) {
               project.filePath = filePath;
             return getProjectInfoForMonth(project, inputData.startDate, inputData.endDate);
           })
-            .then(function () {
-                return res.download(filePath)
-            })
-        //EntryService.generateFile(payload);
-        //return res.download(filePath);
+          .then(function () {
+              return res.download(filePath +  '.xlsx')
+          })
       }
     }
     catch (err) {
@@ -96,41 +98,40 @@ module.exports = {
 
 
 function getProjectInfoForMonth(project, startDate, endDate) {
-
   const projectInfo = {
     projectName:project.name,
-    clientName:project.clientName,
+    clientName:project.client.name,
     teamMembers:project.teamMembers,
     startDate:startDate,
     endDate:endDate,
-    region:project.region
+    region:project.region,
+    filePath:project.filePath
   };
   return new Promise(function (resolve, reject) {
 
     DayEntry.native(function (err, collection) {
       if (err) return res.serverError();
-
       collection
         .find(
           {
             projectId: project.id,
             entryDay: {
-              $gte: startDate,
-              $lte: endDate
+              $gte: new Date(startDate),
+              $lte: new Date(endDate)
             }
           })
         .sort({entryDay: 1})
         .toArray(function (err, dayEntries) {
           if (err) return reject(err);
           _.forEach(projectInfo.teamMembers, function(teamMember){
-            let currentTeamMemberDayEntries = _.find(dayEntries, {email:teamMember.email});
+            let currentTeamMemberDayEntries = _.filter(dayEntries, {userId: teamMember.id });
 
             currentTeamMemberDayEntries = _.map(currentTeamMemberDayEntries, function(currentTeamMemberDayEntry){
               return {
                 day: moment(currentTeamMemberDayEntry.entryDay).format('dddd'),
                 date: moment(currentTeamMemberDayEntry.entryDay).format('L'),
                 hours: currentTeamMemberDayEntry.workHours,
-                comments: currentTeamMemberDayEntry.join('\n')
+                comments: currentTeamMemberDayEntry.tasks.join('\n')
               };
             });
             teamMember.dataEntries = currentTeamMemberDayEntries;
@@ -140,15 +141,14 @@ function getProjectInfoForMonth(project, startDate, endDate) {
     })
   })
     .then(function(projectInfo){
-
       const dateRange = {
-        startDate: projectInfo.startDate,
-        endDate: projectInfo.endDate
+        start: projectInfo.startDate,
+        end: projectInfo.endDate
       };
 
       return new Promise(function(resolve, reject){
         const workbook = ExcelService.createWorkbook(projectInfo, dateRange);
-        createExcelFile(`{projectInfo.filePath}.xlsx`, workbook)
+          ExcelService.createExcelFile(`${projectInfo.filePath}.xlsx`, workbook)
           .then(function () {
             console.log('excel file successfully generated');
             resolve('excel file successfully generated');

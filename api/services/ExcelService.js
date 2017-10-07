@@ -3,6 +3,7 @@
 
 const Excel = require('exceljs');
 const _ = require('lodash');
+const moment = require('moment');
 
 const projectInfo = {
     projectName: 'TVL',
@@ -60,8 +61,8 @@ function createWorkbook(projectInfo,dateRange) {
             startDate: dateRange.start,
             endDate: dateRange.end
         });
-        addDataEntries(worksheet, teamMember.dataEntries);
-        computeTotalHours(worksheet, teamMember.dataEntries);
+        const dataEntriesWithNoGap = addDataEntries(worksheet, teamMember.dataEntries, dateRange);
+        computeTotalHours(worksheet, dataEntriesWithNoGap);
     })
     return workbook;
 }
@@ -126,15 +127,24 @@ function createWorkSheetHeaders(worksheet, options) {
     };
 }
 
-function addDataEntries(worksheet, dataEntries) {
-//Add daily data entries
+function addDataEntries(worksheet, dataEntries, dateRange) {
+    //Add daily data entries
+    dataEntries = fillDataEntryGaps(dataEntries, dateRange);
     _.forEach(dataEntries, function (entry, index) {
         const row = worksheet.getRow(6 + index + 1);
         row.getCell(1).value = entry.day;
         row.getCell(2).value = entry.date;
         row.getCell(3).value = entry.hours;
         row.getCell(4).value = entry.comments;
+        if(entry.isWeekend){
+          row.getCell(1).fill = row.getCell(2).fill = row.getCell(3).fill = row.getCell(4).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: {argb: 'E4B3FC'}
+          };
+        }
     })
+    return dataEntries;
 }
 
 function computeTotalHours(worksheet, dataEntries ) {
@@ -149,4 +159,32 @@ function createExcelFile(path, workbook){
     return workbook.xlsx.writeFile(path);
 }
 
-module.exports = { createWorkbook, createExcelFile }
+function fillDataEntryGaps(dataEntries, dateRange){
+    const start = moment(dateRange.start);
+    const end = moment(dateRange.end);
+
+  const entriesWithoutGap = [];
+  for (let i = start.clone();
+       i.valueOf() <= end.valueOf();
+       i = i.add('1', 'day')) {
+
+      let matchingDataEntryForDay = _.find(dataEntries,function(dataEntry){
+          return (new Date(dataEntry.date).valueOf() == i.toDate().valueOf())
+      });
+      if(!matchingDataEntryForDay){
+        matchingDataEntryForDay = {
+          day: i.format('dddd'),
+          date: i.format('L'),
+          hours: 0,
+          comments: ''
+        };
+      }
+      if(matchingDataEntryForDay.day === 'Saturday' || matchingDataEntryForDay.day === 'Sunday'){
+        matchingDataEntryForDay.isWeekend = true;
+      }
+    entriesWithoutGap.push(matchingDataEntryForDay)
+  }
+  return entriesWithoutGap;
+}
+
+module.exports = { createWorkbook, createExcelFile };
