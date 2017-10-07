@@ -12,6 +12,7 @@ class addTask {
             entryDay : date
         };
         this.getProjects();
+        this.date = moment(date).format('DD MMMM YYYY');
         this.user = UserService.getUser();
         this.$mdDialog = $mdDialog;
     }
