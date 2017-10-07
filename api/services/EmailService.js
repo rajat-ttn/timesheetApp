@@ -1,9 +1,4 @@
-/**
- * Created by pawangoyal on 12/09/17.
- */
-/**
- * Created by ttnd on 8/9/17.
- */
+'use strict';
 
 const nodemailer = require("nodemailer")
     , smtpTransport = nodemailer.createTransport(sails.config.smtpConfig)
@@ -20,8 +15,7 @@ module.exports = {
             html: `<html><head></head><body>${ payload.message }</body></html>`,
             attachments: [{
                 path: sails.config.documentsPath +payload.fileName
-            }
-            ]
+            }]
         };
         return smtpTransport.sendMail(mailOptions);
     }
