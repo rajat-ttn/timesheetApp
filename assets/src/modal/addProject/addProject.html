@@ -10,81 +10,6 @@
         </md-toolbar>
 
         <md-dialog-content>
-            <!--<div>-->
-
-
-                <!--<label class="col-sm-4 control-label"></label>-->
-                <!--<tags-input-->
-                        <!--ng-model="model.tagsCc"-->
-                        <!--display-property="email"-->
-                        <!--placeholder="Cc"-->
-                        <!--replace-spaces-with-dashes="false"-->
-                <!--&gt;-->
-                    <!--<auto-complete-->
-                            <!--source="model.loadUsers($query)"-->
-                            <!--debounce-delay="50"-->
-                            <!--min-length="0"-->
-                            <!--load-on-focus="true"-->
-                            <!--load-on-empty="true"-->
-                            <!--max-results-to-show="10"-->
-                    <!--&gt;</auto-complete>-->
-                <!--</tags-input>-->
-
-
-                <!--<label class="col-sm-4 control-label"></label>-->
-                <!--<tags-input-->
-                        <!--ng-model="model.tagsBcc"-->
-                        <!--display-property="email"-->
-                        <!--placeholder="Bcc"-->
-                        <!--replace-spaces-with-dashes="false"-->
-                <!--&gt;-->
-                    <!--<auto-complete-->
-                            <!--source="model.loadUsers($query)"-->
-                            <!--debounce-delay="50"-->
-                            <!--min-length="0"-->
-                            <!--load-on-focus="true"-->
-                            <!--load-on-empty="true"-->
-                            <!--max-results-to-show="10"-->
-                    <!--&gt;</auto-complete>-->
-                <!--</tags-input>-->
-
-
-                <!--<input type="text" ng-model="model.project.emailConfig.subject" class="form-control"-->
-                       <!--placeholder="Subject">-->
-
-
-                <!--<label class="col-sm-4 control-label">Team</label>-->
-                <!--<tags-input-->
-                        <!--ng-model="model.project.teamMembers"-->
-                        <!--display-property="name"-->
-                        <!--placeholder="Add a user"-->
-                        <!--add-from-autocomplete-only="true"-->
-                        <!--replace-spaces-with-dashes="false"-->
-                <!--&gt;-->
-                    <!--<auto-complete-->
-                            <!--source="model.loadUsers($query)"-->
-                            <!--debounce-delay="50"-->
-                            <!--min-length="0"-->
-                            <!--load-on-focus="true"-->
-                            <!--load-on-empty="true"-->
-                            <!--max-results-to-show="10"-->
-                    <!--&gt;</auto-complete>-->
-                <!--</tags-input>-->
-
-
-                <!--<label class="col-sm-4 control-label">Cut Off</label>-->
-                <!--<md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>-->
-
-                <!--<label class="col-sm-4 control-label">Start Date</label>-->
-                <!--<md-datepicker ng-model="model.project.startDate"></md-datepicker>-->
-
-                <!--<label class="col-sm-4 control-label">End Date</label>-->
-                <!--<md-datepicker ng-model="model.project.endDate"></md-datepicker>-->
-                <!--<button type="submit" ng-click="model.save(model.project)"-->
-                        <!--class="btn btn-default">Add Project-->
-                <!--</button>-->
-            <!--</div>-->
-
             <div layout="column" ng-cloak class="md-inline-form">
 
                 <md-content layout-padding>
@@ -121,7 +46,7 @@
                                     md-contact-email="email"
                                     md-require-match="true"
                                     md-highlight-flags="i"
-                                    filter-selected="model.filter"
+                                    filter-selected="true"
                                     placeholder="To">
                             </md-contact-chips>
 
@@ -133,28 +58,54 @@
                                     md-contact-email="email"
                                     md-require-match="true"
                                     md-highlight-flags="i"
-                                    filter-selected="model.filter"
-                                    placeholder="To">
+                                    filter-selected="true"
+                                    placeholder="Cc">
                             </md-contact-chips>
 
                             <md-contact-chips
-                                    ng-model="model.tagsTo"
+                                    ng-model="model.tagsBcc"
                                     md-contacts="model.loadUsers($query)"
                                     md-contact-name="name"
                                     md-contact-image="image"
                                     md-contact-email="email"
                                     md-require-match="true"
                                     md-highlight-flags="i"
-                                    filter-selected="model.filter"
-                                    placeholder="To">
+                                    filter-selected="true"
+                                    placeholder="Bcc">
+                            </md-contact-chips>
+
+
+                            <md-input-container class="md-block">
+                                <label>Subject</label>
+                                <input ng-model="model.project.clientName">
+                            </md-input-container>
+
+                            <md-contact-chips
+                                    ng-model="model.project.teamMembers"
+                                    md-contacts="model.loadUsers($query)"
+                                    md-contact-name="name"
+                                    md-contact-image="image"
+                                    md-contact-email="email"
+                                    md-require-match="true"
+                                    md-highlight-flags="i"
+                                    filter-selected="true"
+                                    placeholder="Add Team">
                             </md-contact-chips>
 
                             <md-input-container class="md-block">
-                                <label>Biography</label>
-                                <textarea ng-model="user.biography" md-maxlength="150" rows="5"
-                                          md-select-on-focus></textarea>
+                                <label>Cut Off</label>
+                                <md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>
                             </md-input-container>
 
+                            <md-input-container class="md-block">
+                                <label>Start Date</label>
+                                <md-datepicker ng-model="model.project.startDate"></md-datepicker>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>End Date</label>
+                                <md-datepicker ng-model="model.project.endDate"></md-datepicker>
+                            </md-input-container>
                         </form>
                     </div>
                 </md-content>
@@ -164,16 +115,9 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <md-button md-autofocus>
-                More
-            </md-button>
+
             <span flex></span>
-            <md-button>
-                Not Useful
-            </md-button>
-            <md-button>
-                Useful
-            </md-button>
+            <md-button ng-click="model.save(model.project)">Add Project</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
