@@ -106,7 +106,8 @@ function getProjectInfoForMonth(project, startDate, endDate) {
     teamMembers:project.teamMembers,
     startDate:startDate,
     endDate:endDate,
-    region:project.region
+    region:project.region,
+    filePath:project.filePath
   };
   return new Promise(function (resolve, reject) {
 

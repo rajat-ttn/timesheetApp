@@ -61,8 +61,8 @@ function createWorkbook(projectInfo,dateRange) {
             startDate: dateRange.start,
             endDate: dateRange.end
         });
-        addDataEntries(worksheet, teamMember.dataEntries, dateRange);
-        computeTotalHours(worksheet, teamMember.dataEntries);
+        const dataEntriesWithNoGap = addDataEntries(worksheet, teamMember.dataEntries, dateRange);
+        computeTotalHours(worksheet, dataEntriesWithNoGap);
     })
     return workbook;
 }
@@ -144,6 +144,7 @@ function addDataEntries(worksheet, dataEntries, dateRange) {
           };
         }
     })
+    return dataEntries;
 }
 
 function computeTotalHours(worksheet, dataEntries ) {
@@ -167,7 +168,9 @@ function fillDataEntryGaps(dataEntries, dateRange){
        i.valueOf() <= end.valueOf();
        i = i.add('1', 'day')) {
 
-      let matchingDataEntryForDay = _.find(dataEntries,function(dataEntry){return (dataEntry.date == i)});
+      let matchingDataEntryForDay = _.find(dataEntries,function(dataEntry){
+          return (new Date(dataEntry.date).valueOf() == i.toDate().valueOf())
+      });
       if(!matchingDataEntryForDay){
         matchingDataEntryForDay = {
           day: i.format('dddd'),
