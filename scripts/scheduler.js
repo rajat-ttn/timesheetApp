@@ -90,8 +90,8 @@ function checkDailyMailsToBeSent(projects) {
 
 
 function generateExcelSheetForAllProjects(projects){
+  //TODO: Write code to get produce msg parameter.
   return Promise.map(projects, function(){
-   //happyPath
     sender.send({
       entity: 'timesheetApp',
       queue: 'createSpreadSheet',
