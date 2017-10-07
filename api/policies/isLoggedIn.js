@@ -25,8 +25,9 @@ module.exports = function(req, res, next) {
   }
 
   request(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${ token }`, (err, response, body) => {
-      if(err){
-          return res.redirect('/auth/login');
+      body = JSON.parse(body);
+      if(err || body.error_description === "Invalid Value"){
+          return res.status(401).send();
       } else {
           req.user = body;
           next();
