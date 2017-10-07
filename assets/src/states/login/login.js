@@ -9,8 +9,6 @@ class LoginCtrl {
     login()  {
         window.location.href = 'http://localhost:1337/auth/google/';
     }
-
 }
 
-angular.module("timeSheet")
-    .controller('LoginCtrl', LoginCtrl);
+angular.module("timeSheet").controller('LoginCtrl', LoginCtrl);
