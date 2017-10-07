@@ -76,10 +76,14 @@ module.exports = {
         Project
           .find({id: inputData.projectId})
           .then(function (project) {
-            getProjectInfoForMonth(project, inputData.startDate, inputData.endDate);
+              project.filePath = filePath;
+            return getProjectInfoForMonth(project, inputData.startDate, inputData.endDate);
           })
-        EntryService.generateFile(payload);
-        return res.json();
+            .then(function () {
+                return res.download(filePath)
+            })
+        //EntryService.generateFile(payload);
+        //return res.download(filePath);
       }
     }
     catch (err) {
@@ -144,7 +148,7 @@ function getProjectInfoForMonth(project, startDate, endDate) {
 
       return new Promise(function(resolve, reject){
         const workbook = ExcelService.createWorkbook(projectInfo, dateRange);
-        createExcelFile(`./excelSheets/${projectInfo.region}_${projectInfo.projectName}.xlsx`, workbook)
+        createExcelFile(`{projectInfo.filePath}.xlsx`, workbook)
           .then(function () {
             console.log('excel file successfully generated');
             resolve('excel file successfully generated');
