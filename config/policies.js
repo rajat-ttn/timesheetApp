@@ -26,7 +26,11 @@ module.exports.policies = {
     , google: true
     , googleCallback: true
   },
-  
+
+  SpreadSheetController: {
+    downloadSheet: true
+  },
+
   ProjectController: {
     '*': ['isLoggedIn'] // , 'isAdmin'
   }
