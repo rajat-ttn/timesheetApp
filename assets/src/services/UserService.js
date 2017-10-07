@@ -1,7 +1,8 @@
 class UserService {
-    constructor() {
+    constructor($state) {
         'ngInject';
         this.currentUser = null;
+        this.$state = $state;
     }
 
     setUser(data) {
@@ -9,17 +10,23 @@ class UserService {
         localStorage.setItem('user', JSON.stringify(this.currentUser));
     }
 
-    setToken(data) {
-        localStorage.setItem('token', JSON.stringify(data));
-    }
-
     getUser() {
         return this.currentUser || JSON.parse(localStorage.getItem('user'));
     }
 
+    setToken(data) {
+        localStorage.setItem('token', JSON.stringify(data));
+    }
+
+    getToken() {
+        return this.currentUser || JSON.parse(localStorage.getItem('token'));
+    }
+
     logout() {
+        localStorage.setItem('token', JSON.stringify(null));
         localStorage.setItem('user', JSON.stringify(null));
         this.currentUser = null;
+        this.$state.go('login');
     }
 }
 

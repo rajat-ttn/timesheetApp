@@ -1,20 +1,28 @@
 class DashboardCtrl {
-    constructor($location, UserService, ApiService) {
+    constructor($location, $state, UserService, ApiService) {
         'ngInject';
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$location = $location;
+        this.$state = $state;
         this.initialize();
     }
 
     initialize() {
-        this.UserService.setToken(this.$location.search().token);
-        this.$location.url(this.$location.path());
+        if (this.$location.search().token) {
+            this.UserService.setToken(this.$location.search().token);
+            this.$location.url(this.$location.path());
+        }
+
         this.ApiService.getUser()
             .then(resp => {
                 this.UserService.setUser(resp.data);
                 this.$state.go('dbd.user');
             })
+    }
+
+    logout() {
+        this.UserService.logout();
     }
 }
 

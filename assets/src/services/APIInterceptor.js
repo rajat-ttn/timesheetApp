@@ -9,8 +9,7 @@ function APIInterceptor($rootScope, UserService, $state) {
     };
 
     function request(config) {
-        let currentUser = UserService.getUser();
-        let access_token = currentUser ? currentUser.access_token : null;
+        let access_token = UserService.getToken() || null;
         if (access_token) {
             config.headers.Authorization = `Bearer ${access_token}`;
         }
@@ -20,7 +19,6 @@ function APIInterceptor($rootScope, UserService, $state) {
     function responseError(response) {
         if (response.status === 401) {
             UserService.logout();
-            $state.go('login');
             //$rootScope.$broadcast('unauthorized');
         }
         return response
