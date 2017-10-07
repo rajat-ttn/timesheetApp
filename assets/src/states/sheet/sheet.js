@@ -6,11 +6,12 @@ const Filter = {
 };
 
 class SheetCtrl {
-    constructor(ApiService, UserService, $state) {
+    constructor(ApiService, UserService, $state, $window) {
         'ngInject';
         this.ApiService = ApiService;
         this.UserService = UserService;
         this.$state = $state;
+        this.$window = $window;
         this.filter = Filter;
         this.getLists();
         this.today = moment();
@@ -28,9 +29,20 @@ class SheetCtrl {
         this.files = [];
         if (this.filter.region && this.filter.month && this.filter.year) {
             this.regions[this.filter.region].forEach(project => {
-                this.files.push(`${this.filter.region}_${project.projectName}_${this.filter.month}_${this.filter.year}.xlsx`);
+                this.files.push(`${this.filter.region}_${project.projectName}_${this.filter.month}_${this.filter.year}`);
             });
         }
+    }
+
+    download(project, fileName) {
+        const data = {
+            fileName: fileName,
+            projectId: project.projectId,
+            startDate: `${this.filter.year}-${this.months.indexOf(this.filter.month)+1}-01`, //'2017-10-01',
+            endDate: `${this.filter.year}-${this.months.indexOf(this.filter.month)+1}-31`,//'2017-10-31',
+        };
+        this.$window.open(`/spreadsheet/download?projectId=${project.projectId}&startDate=${data.startDate}&endDate=${data.endDate}&fileName=${fileName}`);
+
     }
 }
 
