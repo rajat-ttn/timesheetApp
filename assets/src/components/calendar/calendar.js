@@ -35,7 +35,8 @@
                     },
                     header: {
                         right: 'prev,next today',
-                        left: 'title'
+                        left: 'title',
+                        center: ''
                         // right: 'month,basicWeek,basicDay'
                     },
                     defaultDate: moment(),

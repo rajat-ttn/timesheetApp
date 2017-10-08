@@ -82,6 +82,19 @@ table.admin{
   pointer-events: none;
   color:#888888;
 }
+.fc-header-toolbar{
+  h2{
+    font-weight: 300!important;
+  }
+}
+.mod-theme{
+  background: #2E414F!important;
+}
+.fc-event{
+  border-radius:0px;
+  background: #999999;
+  border:none;
+}
 
 @import "../states/login/login";
 @import "../states/admin/admin";
