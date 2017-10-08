@@ -22,6 +22,17 @@ class UserService {
         return JSON.parse(localStorage.getItem('token'));
     }
 
+    preCook(data){
+        let formatData = [];
+        for(let x = 0; x < data.length; x++){
+            for(let i = 0; i < data[x].tasks.length; i++){
+                formatData.push({ title :  data[x].tasks[i], start : data[x].entryDay});
+            }
+        }
+        return formatData;
+    }
+
+
     logout() {
         localStorage.setItem('token', JSON.stringify(null));
         localStorage.setItem('user', JSON.stringify(null));

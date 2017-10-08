@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400");
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -8,7 +8,8 @@
   outline: none !important; }
 
 body {
-  font-family: 'Quicksand', sans-serif; }
+  font-family: 'Lato', sans-serif;
+  font-weight: 300; }
 
 .clear-fix {
   clear: both; }
@@ -31,7 +32,39 @@ table.admin {
 .admin {
   width: 100%;
   margin: 20px auto;
-  max-width: 800px; }
+  max-width: 900px; }
+
+.fc-body {
+  background: #fff; }
+
+.fc-day-number {
+  font-size: 30px;
+  font-family: 'Lato', sans-serif; }
+
+.fc-time {
+  display: none; }
+
+.fc-day-header span {
+  font-weight: 300; }
+
+.md-nav-bar {
+  background-color: #2E414F !important;
+  color: #fff; }
+  .md-nav-bar a, .md-nav-bar button {
+    color: #fff !important; }
+
+.mod {
+  vertical-align: middle; }
+  .mod img {
+    float: left;
+    width: 27px;
+    height: 27px;
+    margin-right: 5px;
+    border-radius: 100%; }
+
+.fc-other-month, .fc-day-number {
+  pointer-events: none;
+  color: #888888; }
 
 .login {
   width: 300px;

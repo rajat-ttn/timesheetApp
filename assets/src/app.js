@@ -59,5 +59,5 @@
             }
 
         })
-        .config(($mdThemingProvider) => $mdThemingProvider.theme('default').accentPalette('blue'));
+        .config(($mdThemingProvider) => $mdThemingProvider.theme('default').accentPalette('orange'));
 })();

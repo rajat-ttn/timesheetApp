@@ -13,12 +13,13 @@
             }
         };
 
-        function calendarController($scope,$element,$mdDialog) {
+        function calendarController($scope,$element,$mdDialog, UserService, ApiService) {
             let vm = $scope.model;
 
             function run(){
                 $($element).fullCalendar({
                     dayClick: function(date, jsEvent, view) {
+                        console.log(view);
                         $mdDialog.show({
                             controller: 'addTask',
                             controllerAs: 'model',
@@ -33,15 +34,23 @@
                         });
                     },
                     header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,basicWeek,basicDay'
+                        right: 'prev,next today',
+                        left: 'title'
+                        // right: 'month,basicWeek,basicDay'
                     },
                     defaultDate: moment(),
                     navLinks: true, // can click day/week names to navigate views
-                    editable: true,
+                    editable: false,
                     eventLimit: true, // allow "more" link when too many events
-                    events: $scope.data
+                    events: $scope.data,
+                    viewRender: function(view, element) {
+                        var user = UserService.getUser();
+                        // $($element).fullCalendar('removeEvents', []);
+                        ApiService.getTaskList(user.id)
+                            .then(resp => {
+                                $($element).fullCalendar('renderEvents', UserService.preCook(resp.data));
+                            })
+                    }
                 });
             }
 
@@ -54,7 +63,7 @@
             };
         }
 
-        calendarController.$inject = ['$scope','$element','$mdDialog'];
+        calendarController.$inject = ['$scope','$element','$mdDialog', 'UserService','ApiService'];
 
         return CDO;
     }
