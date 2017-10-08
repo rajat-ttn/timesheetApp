@@ -37,7 +37,7 @@
                         center: 'title',
                         right: 'month,basicWeek,basicDay'
                     },
-                    defaultDate: '2017-09-12',
+                    defaultDate: moment(),
                     navLinks: true, // can click day/week names to navigate views
                     editable: true,
                     eventLimit: true, // allow "more" link when too many events

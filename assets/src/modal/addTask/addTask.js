@@ -36,9 +36,10 @@ class addTask {
     }
 
     sendTask(){
+        this.saving = true;
         this.obj.userId = this.user.id;
         this.ApiService.sendTask(this.obj).then(resp => {
-
+            this.saving = false;
             $(this.elem).fullCalendar('renderEvents', this.preCook(this.obj));
             this.obj = {
                 projectId : null,

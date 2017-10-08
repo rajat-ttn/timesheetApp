@@ -27,7 +27,11 @@
                 <td>{{project.client.name}}</td>
                 <td>{{project.region}}</td>
                 <td><input type="checkbox" ng-model="project.emailConfig.dailyStatusEnabled"></td>
-                <td><span ng-repeat="team in project.teamMembers">{{team.email}}</span></td>
+                <td>
+                    <span ng-repeat="team in project.teamMembers track by $index" title="{{team.email}}">{{team.name}}
+                        <span ng-if="!$last">, </span>
+                    </span>
+                </td>
                 <td><a href="" ng-click="model.editProject($event, project)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
             </tr>
             </tbody>
