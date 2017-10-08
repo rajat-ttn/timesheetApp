@@ -6,7 +6,7 @@
              ;
 
          User
-             .find({name: { 'startsWith': searchText }, select: ['name', 'email', 'role']})
+             .find({name: { 'startsWith': searchText }, select: ['name', 'email', 'role','image']})
              .then(users => {
                  return res.json({ data: users})
              })

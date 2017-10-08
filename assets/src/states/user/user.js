@@ -7,16 +7,23 @@ class UserCtrl {
         this.getTaskList();
     }
 
-    setData(tasks=[]) {
-        tasks.forEach(task => {
-            task.start = moment().format(task.entryDay).format('MM-DD-YYYYY');
-        })
+    preCook(data){
+        let formatData = [];
+        for(let x = 0; x < data.length; x++){
+            for(let i = 0; i < data[x].tasks.length; i++){
+                formatData.push({ title :  data[x].tasks[i], start : data[x].entryDay});
+            }
+        }
+
+        $('calendar').fullCalendar('renderEvents', formatData);
+        // $('calendar').formatData;
     }
 
     getTaskList() {
-        this.ApiService.getTaskList()
+        var user = this.UserService.getUser();
+        this.ApiService.getTaskList(user.id)
             .then(resp => {
-                this.tasks = this.setData(resp.data);
+                this.tasks = this.preCook(resp.data);
             })
     }
 }

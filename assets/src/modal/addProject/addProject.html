@@ -1,5 +1,5 @@
-<md-dialog flex="30 10">
-    <form name="model.project_form" ng-cloak>
+<md-dialog style="width:500px">
+    <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Add Project</h2>
@@ -28,10 +28,6 @@
                                 <label>Region Name</label>
                                 <input type="text" ng-required="true" ng-model="model.project.region">
                             </md-input-container>
-
-                            <md-checkbox name="tos" ng-model="model.project.emailConfig.dailyStatusEnabled">
-                                Daily StatusEmail
-                            </md-checkbox>
 
                             <md-contact-chips
                                 ng-model="model.tagsTo"
@@ -89,18 +85,25 @@
 
                             <md-input-container class="md-block">
                                 <label>Cut Off</label>
-                                <md-datepicker ng-model="model.project.logWorkCutOffTime"></md-datepicker>
+                                <!--<md-time-picker ng-model="time.twelve" ></md-time-picker>-->
+                                <md-time-picker ng-model="model.project.logWorkCutOffTime" no-meridiem no-auto-switch></md-time-picker>
+                                <!--<md-datepicker class="md-block" ng-model="model.project.logWorkCutOffTime"></md-datepicker>-->
                             </md-input-container>
 
                             <md-input-container class="md-block">
                                 <label>Start Date</label>
-                                <md-datepicker ng-required="true" ng-model="model.project.startDate"></md-datepicker>
+                                <md-datepicker ng-required="true" class="md-block" ng-model="model.project.startDate"></md-datepicker>
                             </md-input-container>
 
                             <md-input-container class="md-block">
                                 <label>End Date</label>
-                                <md-datepicker ng-model="model.project.endDate"></md-datepicker>
+                                <md-datepicker class="md-block" ng-model="model.project.endDate"></md-datepicker>
                             </md-input-container>
+
+                            <md-checkbox name="tos" ng-model="model.project.emailConfig.dailyStatusEnabled" required>
+                                Daily StatusEmail
+                            </md-checkbox>
+
                         </form>
                     </div>
                 </md-content>

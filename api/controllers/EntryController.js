@@ -40,12 +40,10 @@ let moment = require('moment')
      },
 
      getEntries: (req, res) => {
-        let userId = req.query['userId']
-            , projectId = req.query['projectId']
-            ;
+        let userId = req.query['userId'];
 
          DayEntry
-             .find({where: { userId: userId, projectId: projectId} , select: ['entryDay', 'workHours', 'tasks'] })
+             .find({where: { userId: userId} , select: ['entryDay', 'workHours', 'tasks'] })
              .sort('entryDay ASC')
              .then(entries => {
                  return res.json({ data: entries })

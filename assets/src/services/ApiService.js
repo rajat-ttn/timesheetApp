@@ -11,8 +11,8 @@ class ApiService {
             })
     }
 
-    getTaskList() {
-        return this.$http.get('/entry/getList')
+    getTaskList(id) {
+        return this.$http.get('/entry/getList', { params: { userId:id }})
             .then(resp => {
                 return resp;
             })
